@@ -1,65 +1,167 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Flower, FlowerDrawn } from "@/components/icons";
+import Link from "next/link";
+import { HandwrittenCircle } from "./animated-circle";
+import { getSermons } from "@/lib/sermons";
+import { SermonCard } from "@/components/sermon-card";
+const backgroundUrl = "/images/home_01.jpg";
 
-export default function Home() {
+const features = [
+  {
+    image:
+      "https://rcfunilag.com/wp-content/uploads/2023/05/Snapinsta.app_345309011_740436354489814_8763262030661234831_n_1024-e1685062328403.jpg.webp",
+    title: "The Word",
+    callToAction: "See sermons",
+    href: "",
+  },
+  {
+    image: "https://rcfunilag.com/wp-content/uploads/2023/05/rcf-exc.jpeg.webp",
+    title: "Excellence",
+    callToAction: "Check achievements",
+    href: "",
+  },
+  {
+    image:
+      "https://rcfunilag.com/wp-content/uploads/2023/05/Snapinsta.app_342729953_1062808808027284_8768411877360006972_n_1024.jpg",
+    title: "Prayer",
+    callToAction: "Drop prayer requests",
+    href: "",
+  },
+];
+
+export default async function Home() {
+  const sermons = await getSermons();
+  const latestSermons = sermons.slice(0, 3);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div>
+      <div className="relative min-h-dvh">
+        <div
+          style={{ "--bg-url": `url(${backgroundUrl})` } as React.CSSProperties}
+          className="absolute inset-0 bg-(image:--bg-url) bg-black bg-no-repeat bg-cover bg-bottom"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+        <div className="absolute inset-0 backdrop-grayscale" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(116,58,86,0.4)_0.92%,rgba(26,0,12,0.8)_100%)] bg-blend-multiply opacity-70" />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative pt-16 pb-8 h-full flex flex-col gap-10 items-center text-white text-center">
+          <div className="mt-32 flex flex-col gap-10 items-center">
+            <Badge
+              variant="outline"
+              className="bg-accent/10 text-white uppercase py-2 px-6 gap-2 sm:text-base"
+            >
+              <Flower className="size-6!" />
+              Welcome to RCF UNILAG
+              <Flower className="size-6!" />
+            </Badge>
+            <div className="flex flex-col gap-2 items-center-safe">
+              <h1 className="relative text-6xl lg:text-8xl font-bold font-display tracking-tighter flex flex-col md:block">
+                RCF,{" "}
+                <span className="bg-linear-to-r from-[#E71A57] to-[#9342AB] bg-clip-text text-transparent">
+                  One Family
+                </span>
+                <span className="absolute bottom-0 left-0 -translate-x-3/4 translate-y-12">
+                  <FlowerDrawn className="hidden md:block" />
+                </span>
+                <span className="absolute top-0 right-0 translate-x-3/4 -translate-y-8 rotate-180 text-[#E71B5D]">
+                  <FlowerDrawn className="hidden sm:block" />
+                </span>
+              </h1>
+              <p className="sm:w-xl md:text-xl">
+                We are passionate about our members. A place to grow in faith,
+                excel in academics, and find your purpose in God.
+              </p>
+            </div>
+            <div className="flex gap-2 md:gap-4 items-center">
+              <Button size="lg">Join Us</Button>
+              <Button size="lg" variant="outline">
+                Quick Links
+              </Button>
+            </div>
+          </div>
+          <div className="mt-auto">
+            <h3>OUR WEEKLY SERVICES</h3>
+            <div className="space-y-2 mt-6 text-sm sm:text-base">
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-2 md:gap-6 md:[&>span:nth-child(1)]:justify-end md:[&>span:nth-child(3)]:justify-start text-sm sm:text-base">
+                <span className="flex">SUN: 8:00 AM (Service)</span>
+                <span className="mx-auto hidden md:flex">|</span>
+                <span className="flex">TUE: 6:00 PM (Bible Study)</span>
+              </div>
+
+              <div className="grid grid-cols md:grid-cols-[1fr_auto_1fr] gap-2 md:gap-6 md:[&>span:nth-child(1)]:justify-end md:[&>span:nth-child(3)]:justify-start text-sm sm:text-base">
+                <span className="flex">THU: 6:00 PM (Evangelism)</span>
+                <span className="mx-auto hidden md:flex">|</span>
+                <span className="flex">FRI: 6:00 PM (Divine Encounter)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section className="section flex flex-col gap-10">
+        <div>
+          <h2 className="text-3xl font-normal">Welcome</h2>
+          <h1 className="text-6xl font-black uppercase tracking-tighter flex flex-col md:block">
+            We are RCF UNILAG,{" "}
+            <span className="w-fit relative text-secondary">
+              <span className="absolute w-[calc(100%+1rem)] top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                <HandwrittenCircle className="w-full stroke-[6px]" />
+              </span>
+              <span className="relative">One Family</span>
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="font-medium mt-2 text-lg">
+            This is a place to grow in faith and in life.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              style={
+                { "--bg-url": `url(${feature.image})` } as React.CSSProperties
+              }
+              className="relative h-96 bg-(image:--bg-url) p-4 text-white bg-no-repeat bg-cover bg-bottom flex flex-col justify-between"
+            >
+              <div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-black" />
+              <div className="relative">
+                <p>We are a people of</p>
+                <h2 className="uppercase font-extrabold text-4xl">
+                  {feature.title}
+                </h2>
+              </div>
+              <div className="relative">
+                <Button asChild className="bg-black/10">
+                  <Link href={feature.href}>{feature.callToAction}</Link>
+                </Button>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
+      </section>
+
+      {/* Latest Sermons Section */}
+      <section className="section py-16 bg-gray-50 flex flex-col gap-10">
+        <div className="text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-4">
+          <div>
+            <h2 className="text-4xl font-extrabold uppercase tracking-tight text-gray-900">
+              Latest Sermons
+            </h2>
+            <p className="mt-2 text-gray-600 text-lg">
+              Catch up on recent messages and teachings
+            </p>
+          </div>
+          <Button asChild variant="outline">
+            <Link href="/sermons">View Complete Archive</Link>
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {latestSermons.map((sermon) => (
+            <SermonCard key={sermon.id} sermon={sermon} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
