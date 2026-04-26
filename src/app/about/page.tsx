@@ -1,34 +1,32 @@
-import Image from "next/image";
-
 const backgroundUrl =
   "https://rcfunilag.com/wp-content/uploads/2023/05/Snapinsta.app_319123953_447057657639854_8008908822574769902_n_1024-1-e1685060519110.jpg.webp";
 
 export default function About() {
   return (
     <div>
-      <div className="relative h-[500px]">
+      <div className="relative h-[500px] isolate bg-black/90 [&>div]:mix-blend-luminosity">
         <div
           style={{ "--bg-url": `url(${backgroundUrl})` } as React.CSSProperties}
           className="size-full bg-(image:--bg-url) bg-black bg-no-repeat bg-cover bg-bottom"
         />
-        <div className="absolute inset-0 z-10 bg-linear-to-b from-black/50 via-transparent to-black" />
+        <div className="absolute inset-0 z-10 bg-linear-to-b from-black via-transparent to-black" />
       </div>
-      <section className="section flex flex-col gap-24">
+      <section className="section relative flex flex-col gap-24">
         <div className="max-w-3xl space-y-2 mx-auto">
-          <h1 className="text-5xl font-black uppercase text-balance">
-            We&apos;re the{" "}
+          <h1 className="text-5xl font-bold font-display tracking-tighter uppercase text-balance sm:text-6xl">
+            We are the{" "}
             <span className="text-primary">
               Redeemed Christian Fellowship, UNILAG
             </span>
           </h1>
           <p className="text-lg">
-            The Redeemed Christian Fellowship of the University of Lagos is a
-            subsidiary of Christ the Redeemer’s Ministry of RCCG. We are
-            Christ-centered and have the mandate to shine our light in and
-            beyond the environs of school. We are the chosen generation.
+            We are RCF UNILAG, the campus fellowship of Christ the
+            Redeemer&apos;s Ministry (RCCG). We are unapologetically
+            Christ-centred, we carry a mandate to illuminate our world, from
+            this campus to the world. We are the Chosen Generation.
           </p>
         </div>
-        <div className="flex flex-col gap-8 md:gap-4">
+        {/* <div className="flex flex-col gap-8 md:gap-4">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] items-center-safe gap-6">
             <div className="w-full h-[250px] relative">
               <Image
@@ -92,9 +90,9 @@ export default function About() {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
-      <section id="executives" className="section space-y-8">
+      {/* <section id="executives" className="section space-y-8">
         <h1 className="text-5xl font-black uppercase text-center">
           Our <span className="text-primary">Executives</span>
         </h1>
@@ -103,7 +101,7 @@ export default function About() {
             <div key={index} className="h-[300px] bg-muted" />
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

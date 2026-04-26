@@ -141,25 +141,27 @@ export default async function Home() {
       </section>
 
       {/* Latest Sermons Section */}
-      <section className="section py-16 bg-gray-50 flex flex-col gap-10">
-        <div className="text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-4">
-          <div>
-            <h2 className="text-4xl font-extrabold uppercase tracking-tight text-gray-900">
-              Latest Sermons
-            </h2>
-            <p className="mt-2 text-gray-600 text-lg">
-              Catch up on recent messages and teachings
-            </p>
+      <section className="bg-muted">
+        <div className="section flex flex-col gap-10">
+          <div className="text-center md:text-left flex flex-col md:flex-row justify-between items-end gap-4">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-4xl font-bold uppercase tracking-tight text-foreground">
+                Latest Sermons
+              </h2>
+              <p className="text-muted-foreground">
+                Catch up on recent messages and teachings
+              </p>
+            </div>
+            <Button asChild variant="outline">
+              <Link href="/sermons">View Sermons</Link>
+            </Button>
           </div>
-          <Button asChild variant="outline">
-            <Link href="/sermons">View Complete Archive</Link>
-          </Button>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {latestSermons.map((sermon) => (
-            <SermonCard key={sermon.id} sermon={sermon} />
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {latestSermons.map((sermon) => (
+              <SermonCard key={sermon.id} sermon={sermon} />
+            ))}
+          </div>
         </div>
       </section>
     </div>
