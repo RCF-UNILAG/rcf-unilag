@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import "./cabinet-grotesk.css";
-import { Footer } from "./footer";
-import { Navigation } from "./navigation";
+import { Footer } from "../components/footer";
+import { Navigation } from "../components/navigation";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
