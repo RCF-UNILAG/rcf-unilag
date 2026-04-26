@@ -14,8 +14,13 @@ social_youtube,https://youtube.com/@rcfunilag
 footer_email,hello@rcfunilag.org
 `;
 
+export const SITE_SETTINGS_TAG = 'site-settings';
+
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const rows = await fetchAndParseCSV(SITE_CSV_URL, FALLBACK_SITE_SETTINGS_CSV);
+  const rows = await fetchAndParseCSV(SITE_CSV_URL, {
+    fallbackCsvText: FALLBACK_SITE_SETTINGS_CSV,
+    tags: [SITE_SETTINGS_TAG],
+  });
 
   const settings = rows.reduce((acc, row) => {
     const key = row["Key"]?.trim();

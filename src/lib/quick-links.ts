@@ -21,8 +21,13 @@ const FALLBACK_CSV_DATA = `Timestamp,Link Title,Destination URL,Slug,Icon (Emoji
 4/26/2026 10:30:00,Old Prayer Hotline,https://example.com/old,old-prayer,📞,FALSE,4
 `;
 
+export const QUICK_LINK_TAG = 'quick-links';
+
 export async function getQuickLinks(): Promise<QuickLink[]> {
-  const rows = await fetchAndParseCSV(QL_CSV_URL, FALLBACK_CSV_DATA);
+  const rows = await fetchAndParseCSV(QL_CSV_URL, {
+    fallbackCsvText: FALLBACK_CSV_DATA,
+    tags: [QUICK_LINK_TAG],
+  });
 
   const links: QuickLink[] = rows.map((link) => ({
     title: link["Link Title"] ?? "",
@@ -39,3 +44,4 @@ export async function getQuickLinks(): Promise<QuickLink[]> {
 
   return active;
 }
+

@@ -20,8 +20,13 @@ const FALLBACK_CSV_DATA = `Timestamp,Date Preached,Sermon Title,Speaker,Descript
 3/16/2026 10:10:00,2026-03-15,Koinonia,Pastor Taiwo Tonade,"Experiencing deep spiritual fellowship, partnership, and intimacy with the Holy Spirit.",https://www.youtube.com/live/8-ZVpptaf3s?si=aezP3kKtTz2yh3Mj&t=1489
 `;
 
+export const SERMONS_TAG = 'sermons';
+
 export async function getSermons(): Promise<Sermon[]> {
-  const rows = await fetchAndParseCSV(SERMONS_CSV_URL, FALLBACK_CSV_DATA);
+  const rows = await fetchAndParseCSV(SERMONS_CSV_URL, {
+    fallbackCsvText: FALLBACK_CSV_DATA,
+    tags: [SERMONS_TAG],
+  });
 
   const sermons: Sermon[] = rows
     .map((row, index) => ({

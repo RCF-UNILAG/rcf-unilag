@@ -2,14 +2,21 @@ import Papa from "papaparse";
 
 export async function fetchAndParseCSV(
   url: string | undefined,
-  fallbackCsvText: string,
+  options?: {
+    fallbackCsvText?: string;
+    revalidate?: number;
+    tags?: string[];
+  }
 ): Promise<Record<string, string>[]> {
-  let csvText = fallbackCsvText;
+  let csvText = options?.fallbackCsvText ?? "";
 
   if (url) {
     try {
       const response = await fetch(url, {
-        next: { revalidate: 3600 },
+        next: {
+          revalidate: options?.revalidate ?? 3600,
+          tags: options?.tags,
+        },
       });
       if (response.ok) {
         csvText = await response.text();
