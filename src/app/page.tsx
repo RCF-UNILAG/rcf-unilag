@@ -77,14 +77,16 @@ export default async function Home() {
               </p>
             </div>
             <div className="flex gap-2 md:gap-4 items-center">
-              <Link href="/ql/become-a-member">
-                <Button size="lg">Join Us</Button>
-              </Link>
-              <Link href="/ql">
-                <Button size="lg" variant="outline">
+              <Button asChild size="lg">
+                <Link href="/ql/become-a-member" target="_blank">
+                  Join Us
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/ql">
                   Quick Links
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
           <div className="sm:mt-auto flex flex-col gap-4 items-center">
