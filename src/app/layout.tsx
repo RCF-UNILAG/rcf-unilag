@@ -23,7 +23,7 @@ const syne = Syne({
 export const metadata: Metadata = {
   title: "RCF UNILAG | The Chosen Generation",
   description:
-    "RCF, One Family. We are passionate about our members and provide a place to grow, in faith and other areas. We are a people of THE WORD. Every month, we have a Bible Study Reading Plan, to help our members grow in the knowledge of the Word, and to apply this Word in",
+    "We are RCF UNILAG, the campus fellowship of Christ the Redeemer's Ministry (RCCG). We are unapologetically Christ-centred, we carry a mandate to illuminate our world, from this campus to the world. We are the Chosen Generation."
 };
 
 export default function RootLayout({
