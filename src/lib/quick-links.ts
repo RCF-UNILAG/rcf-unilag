@@ -23,7 +23,7 @@ const FALLBACK_CSV_DATA = `Timestamp,Link Title,Destination URL,Slug,Icon (Emoji
 
 export const QUICK_LINK_TAG = 'quick-links';
 
-export async function getQuickLinks(): Promise<QuickLink[]> {
+export async function getQuickLinks({ includeInactive = false } = {}): Promise<QuickLink[]> {
   const rows = await fetchAndParseCSV(QL_CSV_URL, {
     fallbackCsvText: FALLBACK_CSV_DATA,
     tags: [QUICK_LINK_TAG],
@@ -37,11 +37,10 @@ export async function getQuickLinks(): Promise<QuickLink[]> {
     is_active: link["Is Active"] !== "FALSE",
     order: link["Display Order"] ?? "0",
   }));
+  console.log("links", links)
 
-  const active = links
-    .filter((link) => link.is_active)
-    .sort((a, b) => Number(b.order) - Number(a.order));
+  const filteredLinks = includeInactive ? links : links.filter((link) => link.is_active);
 
-  return active;
+  return filteredLinks.sort((a, b) => Number(b.order) - Number(a.order));
 }
 

@@ -7,10 +7,10 @@ export async function GET(
 ) {
   const { slug } = await params;
 
-  const links = await getQuickLinks();
+  const links = await getQuickLinks({ includeInactive: true });
 
   const targetLink = links.find(
-    (link) => link.slug?.toLowerCase() === slug.toLowerCase() && link.is_active,
+    (link) => link.slug?.toLowerCase() === slug.toLowerCase(),
   );
 
   if (targetLink && targetLink.url) {
