@@ -5,6 +5,9 @@ import Link from "next/link";
 import { HandwrittenCircle } from "./animated-circle";
 import { getSermons } from "@/lib/sermons";
 import { SermonCard } from "@/components/sermon-card";
+import Image from "next/image";
+import { getSiteSettings } from "@/lib/settings";
+import { SocialLinks } from "@/components/social-links";
 const backgroundUrl = "/images/home_01.jpg";
 
 const features = [
@@ -31,12 +34,13 @@ const features = [
 ];
 
 export default async function Home() {
+  const settings = await getSiteSettings();
   const sermons = await getSermons();
   const latestSermons = sermons.slice(0, 3);
 
   return (
     <div>
-      <div className="relative min-h-dvh">
+      <div className="relative">
         <div
           style={{ "--bg-url": `url(${backgroundUrl})` } as React.CSSProperties}
           className="absolute inset-0 bg-(image:--bg-url) bg-black bg-no-repeat bg-cover bg-bottom"
@@ -44,8 +48,8 @@ export default async function Home() {
         <div className="absolute inset-0 backdrop-grayscale" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(116,58,86,0.4)_0.92%,rgba(26,0,12,0.8)_100%)] bg-blend-multiply opacity-70" />
         <div className="absolute inset-0 bg-black/50" />
-        <div className="relative pt-16 pb-8 h-full flex flex-col gap-10 items-center text-white text-center">
-          <div className="mt-32 flex flex-col gap-10 items-center">
+        <div className="relative px-4 pt-40 pb-16 md:py-40 h-dvh flex flex-col gap-8 justify-center items-center text-white text-center">
+          <div className="flex flex-col gap-10 items-center">
             <Badge
               variant="outline"
               className="bg-accent/10 text-white uppercase py-2 px-6 gap-2 sm:text-base"
@@ -55,7 +59,7 @@ export default async function Home() {
               <Flower className="size-6!" />
             </Badge>
             <div className="flex flex-col gap-2 items-center-safe">
-              <h1 className="relative text-6xl lg:text-8xl font-bold font-display tracking-tighter flex flex-col md:block">
+              <h1 className="relative text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold font-display tracking-tighter flex flex-col md:block">
                 RCF,{" "}
                 <span className="bg-linear-to-r from-[#E71A57] to-[#9342AB] bg-clip-text text-transparent">
                   One Family
@@ -73,26 +77,34 @@ export default async function Home() {
               </p>
             </div>
             <div className="flex gap-2 md:gap-4 items-center">
-              <Button size="lg">Join Us</Button>
-              <Button size="lg" variant="outline">
-                Quick Links
-              </Button>
+              <Link href="/ql/become-a-member">
+                <Button size="lg">Join Us</Button>
+              </Link>
+              <Link href="/ql">
+                <Button size="lg" variant="outline">
+                  Quick Links
+                </Button>
+              </Link>
             </div>
           </div>
-          <div className="mt-auto">
-            <h3>OUR WEEKLY SERVICES</h3>
-            <div className="space-y-2 mt-6 text-sm sm:text-base">
-              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-2 md:gap-6 md:[&>span:nth-child(1)]:justify-end md:[&>span:nth-child(3)]:justify-start text-sm sm:text-base">
-                <span className="flex">SUN: 8:00 AM (Service)</span>
-                <span className="mx-auto hidden md:flex">|</span>
-                <span className="flex">TUE: 6:00 PM (Bible Study)</span>
+          <div className="sm:mt-auto flex flex-col gap-4 items-center">
+            <div className="hidden sm:flex flex-col gap-4 items-center">
+              <h3 className="font-bold text-base">OUR WEEKLY SERVICES</h3>
+              <div className="grid grid-cols-[1fr_auto_1fr] gap-6 [&>span:nth-child(1)]:justify-end [&>span:nth-child(3)]:justify-start text-base">
+                <span className="flex"><span className="font-bold">SUN</span>: 8:00 AM (Service)</span>
+                <span className="mx-auto">|</span>
+                <span className="flex"><span className="font-bold">TUE</span>: 6:00 PM (Bible Study)</span>
               </div>
 
-              <div className="grid grid-cols md:grid-cols-[1fr_auto_1fr] gap-2 md:gap-6 md:[&>span:nth-child(1)]:justify-end md:[&>span:nth-child(3)]:justify-start text-sm sm:text-base">
-                <span className="flex">THU: 6:00 PM (Evangelism)</span>
-                <span className="mx-auto hidden md:flex">|</span>
-                <span className="flex">FRI: 6:00 PM (Divine Encounter)</span>
+              <div className="grid grid-cols-[1fr_auto_1fr] gap-6 [&>span:nth-child(1)]:justify-end [&>span:nth-child(3)]:justify-start text-base">
+                <span className="flex"><span className="font-bold">THU</span>: 6:00 PM (Evangelism)</span>
+                <span className="mx-auto">|</span>
+                <span className="flex"><span className="font-bold">FRI</span>: 6:00 PM (Divine Encounter)</span>
               </div>
+            </div>
+            <div className="flex gap-2 items-center">
+              <span>Connect with us:</span>
+              <SocialLinks settings={settings} className="flex items-center gap-4" />
             </div>
           </div>
         </div>

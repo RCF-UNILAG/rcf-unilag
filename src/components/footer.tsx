@@ -1,11 +1,13 @@
-"use client";
-
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { SocialLinks } from "./social-links";
+import { getSiteSettings } from "@/lib/settings";
 
-export function Footer() {
+export async function Footer() {
+  const settings = await getSiteSettings();
+
   return (
     <footer className="bg-black text-white">
       <div className="section py-12 md:py-16 flex flex-col gap-16">
@@ -56,44 +58,7 @@ export function Footer() {
               Christ-centred, we carry a mandate to illuminate our world, from
               this campus to the world. We are the Chosen Generation.
             </p>
-            <div className="flex items-center gap-4">
-              <Link href="#">
-                <Image
-                  src="/brands/youtube.svg"
-                  alt="YouTube"
-                  className="invert-100"
-                  width={16}
-                  height={16}
-                />
-              </Link>
-              <Link href="#">
-                <Image
-                  src="/brands/instagram.svg"
-                  alt="Instagram"
-                  className="invert-100"
-                  width={16}
-                  height={16}
-                />
-              </Link>
-              <Link href="#">
-                <Image
-                  src="/brands/x.svg"
-                  alt="X"
-                  className="invert-100"
-                  width={16}
-                  height={16}
-                />
-              </Link>
-              <Link href="#">
-                <Image
-                  src="/brands/facebook.svg"
-                  alt="Facebook"
-                  className="invert-100"
-                  width={16}
-                  height={16}
-                />
-              </Link>
-            </div>
+            <SocialLinks settings={settings} className="flex items-center gap-4" />
           </div>
 
           <FooterColumn
