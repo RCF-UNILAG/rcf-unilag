@@ -17,10 +17,11 @@ export function SermonBrowser({ initialSermons }: SermonBrowserProps) {
     if (!searchQuery.trim()) return initialSermons;
 
     const lowerQuery = searchQuery.toLowerCase();
-    return initialSermons.filter((sermon) =>
-      sermon.title.toLowerCase().includes(lowerQuery) ||
-      sermon.speaker.toLowerCase().includes(lowerQuery) ||
-      sermon.description.toLowerCase().includes(lowerQuery)
+    return initialSermons.filter(
+      (sermon) =>
+        sermon.title.toLowerCase().includes(lowerQuery) ||
+        sermon.speaker.toLowerCase().includes(lowerQuery) ||
+        sermon.description.toLowerCase().includes(lowerQuery),
     );
   }, [searchQuery, initialSermons]);
 
@@ -50,9 +51,12 @@ export function SermonBrowser({ initialSermons }: SermonBrowserProps) {
       ) : (
         <div className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-100">
           <Search className="h-10 w-10 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900">No sermons found</h3>
+          <h3 className="text-lg font-medium text-gray-900">
+            No sermons found
+          </h3>
           <p className="mt-1 text-gray-500">
-            We couldn't find anything matching "{searchQuery}". Try a different term.
+            We could&apos;t find anything matching &quot;{searchQuery}&quot;.
+            Try a different term.
           </p>
         </div>
       )}
