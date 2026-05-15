@@ -61,7 +61,7 @@ export function SermonCard({ sermon }: SermonCardProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <PlayCircle className="w-4 h-4 mr-2" />
+              {/* <PlayCircle className="w-4 h-4 mr-2" /> */}
               Watch Now
             </Link>
           </Button>

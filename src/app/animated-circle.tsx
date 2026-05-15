@@ -12,7 +12,7 @@ export function HandwrittenCircle({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 500 150"
       preserveAspectRatio="none"
-      className={cn("stroke-primary stroke-2", className)}
+      className={cn("stroke-primary stroke-6", className)}
       {...props}
     >
       <motion.path
