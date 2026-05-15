@@ -122,14 +122,14 @@ export function Navigation() {
         {!isMobile && (
           <NavigationMenu viewport={isMobile}>
             <NavigationMenuList className="flex-wrap">
-              <NavigationMenuItem>
+              {/* <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
                   className={navigationMenuTriggerStyle()}
                 >
                   <Link href="/about">Who are we?</Link>
                 </NavigationMenuLink>
-              </NavigationMenuItem>
+              </NavigationMenuItem> */}
               {/* <NavigationMenuItem>
                 <NavigationMenuTrigger>Who are we?</NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -284,14 +284,14 @@ function NavigationDialog() {
             </SheetPrimitive.Close>
           </header>
 
-          <div data-slot="sheet-header" className="flex h-[calc(100dvh-5rem)] flex-col justify-center gap-4 p-4">
+          <div data-slot="sheet-header" className="w-full md:max-w-5xl mx-auto flex h-[calc(100dvh-5rem)] flex-col justify-center gap-4 p-4">
             <nav className="flex flex-col gap-4">
               <NavLink href="/" className={linkClassName} onClick={close}>
                 Home
               </NavLink>
-              <NavLink href="/about" className={linkClassName} onClick={close}>
+              {/* <NavLink href="/about" className={linkClassName} onClick={close}>
                 Who are we?
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 href="/sermons"
                 className={linkClassName}
