@@ -16,19 +16,16 @@ export function SermonCard({ sermon }: SermonCardProps) {
   });
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-xl overflow-hidden border border-border shadow-xs hover:shadow-sm transition-shadow duration-300">
+    <Link href={sermon.youtube_link} target="_blank" rel="noopener noreferrer" className="flex flex-col h-full bg-white rounded-xs overflow-hidden border border-border shadow-xs hover:shadow-sm transition-shadow duration-300">
       {/* Thumbnail */}
-      <Link
-        href={sermon.youtube_link}
-        target="_blank"
-        rel="noopener noreferrer"
+      <div
         className="relative block aspect-video overflow-hidden"
       >
         <SermonThumbnail
           youtubeUrl={sermon.youtube_link}
           title={sermon.title}
         />
-      </Link>
+      </div>
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-6">
@@ -43,30 +40,14 @@ export function SermonCard({ sermon }: SermonCardProps) {
           </div>
         </div>
 
-        <h3 className="text-base font-bold mb-2 line-clamp-2">
+        <h3 className="text-base font-bold line-clamp-2">
           {sermon.title}
         </h3>
 
-        <p className="text-muted-foreground line-clamp-3 mb-6 flex-grow text-sm">
+        <p className="text-muted-foreground line-clamp-3 flex-grow text-sm">
           {sermon.description}
         </p>
-
-        <div className="mt-auto">
-          <Button
-            asChild
-            className="w-full sm:w-auto bg-black text-white hover:bg-black/80 transition-colors"
-          >
-            <Link
-              href={sermon.youtube_link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {/* <PlayCircle className="w-4 h-4 mr-2" /> */}
-              Watch Now
-            </Link>
-          </Button>
-        </div>
       </div>
-    </div>
+    </Link>
   );
 }
