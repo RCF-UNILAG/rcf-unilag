@@ -48,7 +48,7 @@ export function PillarCard({
       >
         <div className={cn("w-full md:w-[calc(50%+4rem)] bg-card p-10 xl:p-12 flex flex-col gap-4 rounded-xl shadow-sm")}>
           {eyebrow && (
-            <p className="text-sm font-semibold tracking-wide">
+            <p className="text-sm font-semibold">
               {eyebrow}
             </p>
           )}
@@ -64,13 +64,13 @@ export function PillarCard({
             </h3>
           </div>
 
-          <p className="text-sm leading-relaxed text-foreground/80 max-w-prose">
+          <p className="leading-relaxed text-foreground/80 max-w-prose">
             {description}
           </p>
 
           {ctaLabel && ctaHref && (
             <div className="mt-2">
-              <Button asChild variant="monochrome" className="rounded-full">
+              <Button asChild variant="black" className="rounded-full">
                 <Link href={ctaHref}>{ctaLabel}</Link>
               </Button>
             </div>
