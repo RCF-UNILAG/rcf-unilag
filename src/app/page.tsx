@@ -8,7 +8,9 @@ import { SermonCard } from "@/components/sermon-card";
 import { getSiteSettings, SiteSettings } from "@/lib/settings";
 import { SocialLinks } from "@/components/social-links";
 import { PillarCard } from "@/components/pillar-card";
-const backgroundUrl = "/images/home_01.jpg";
+import Image from "next/image";
+
+const backgroundUrl = "https://res.cloudinary.com/dpjo7lpww/image/upload/v1781396846/4cce8efd6dfc1f090d1bd130ffa0ed7a3a925264_vtomzv.jpg";
 
 const pillars = [
   {
@@ -64,14 +66,38 @@ export default async function Home() {
 
       {/* Latest Sermons Section */}
       <section className="bg-[#EAD9EE]">
+        <div className="section text-center flex flex-col gap-9">
+          <div className="space-y-1">
+            <h2 className="text-6xl font-bold font-display">Join us this Sunday</h2>
+            <p className="">
+              Join us by 8 AM, either in person or online. We'd love to see you!
+            </p>
+          </div>
+          <div className="flex flex-col gap-2 md:flex-row items-center gap-4 justify-center">
+            <Link href="/ql/become-a-member" target="_blank">
+              <Button size="lg" variant="black">Attend In Person</Button>
+            </Link>
+            <Link href="https://www.youtube.com/@rcfunilagtv" target="_blank">
+              <Button size="lg" variant="white">Join Online</Button>
+            </Link>
+          </div>
+        </div>
+        <div className="h-[480px] relative w-full">
+          <Image
+            src="https://res.cloudinary.com/dpjo7lpww/image/upload/v1781396840/15d9f3f201166fa93ac1067d4f244211d3fcbaba_1_t0tx5x.jpg"
+            alt="RCF UNILAG Sunday Service"
+            fill
+            className="object-cover"
+          />
+        </div>
         <div className="section flex flex-col gap-10">
           <div className="flex flex-col gap-2 text-center">
-            <h2 className="text-5xl font-display font-bold uppercase tracking-tight text-foreground">
-              Latest Sermons
+            <h2 className="text-5xl font-display font-bold tracking-tight text-foreground">
+              Catch all of our Past Sermons
             </h2>
-            <p className="text-muted-foreground">
+            {/* <p className="text-muted-foreground">
               Catch up on recent messages and teachings
-            </p>
+            </p> */}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -79,9 +105,15 @@ export default async function Home() {
               <SermonCard key={sermon.id} sermon={sermon} />
             ))}
           </div>
+
+          <div className="flex justify-center">
+            <Button asChild size="lg" variant="black">
+              <Link href="/sermons">See all Sermons</Link>
+            </Button>
+          </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }
 
@@ -95,7 +127,7 @@ export function Hero({ settings }: { settings: SiteSettings }) {
       />
       <div className="absolute inset-0 backdrop-grayscale" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(116,58,86,0.4)_0.92%,rgba(26,0,12,0.8)_100%)] bg-blend-multiply opacity-70" />
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/10" />
       <div className="relative px-4 pt-40 pb-16 md:py-40 h-dvh flex flex-col gap-8 justify-center items-center text-white text-center">
         <div className="flex flex-col gap-10 items-center">
           <Badge
