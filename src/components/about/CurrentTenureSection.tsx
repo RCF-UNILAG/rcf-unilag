@@ -106,10 +106,6 @@ export function CurrentTenureSection({ tenure }: CurrentTenureSectionProps) {
                 : []),
               {
                 type: "banner-image",
-                imageUrl: "https://res.cloudinary.com/dpjo7lpww/image/upload/v1782603276/thmg-1_umnaxb.jpg"
-              },
-              {
-                type: "banner-image",
                 imageUrl: "https://res.cloudinary.com/dpjo7lpww/image/upload/v1782603198/thmg-2_ane5og.jpg"
               },
               // Slide 3: Text/identity card — always present
