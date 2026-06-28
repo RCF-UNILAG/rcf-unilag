@@ -1,77 +1,76 @@
 import { unstable_cache } from "next/cache";
 import { fetchAndParseCSV } from "./csv";
 
-// ─── Types ──────────────────────────────────────────────────────────────────
-
-export interface LeadershipPastor {
+export interface Executive {
   name: string;
   role: string;
   photoUrl: string;
 }
 
-export interface LeadershipTenure {
-  year: string;    // e.g. "2025/2026"
-  slug: string;    // e.g. "2025-2026" — derived at parse time, not at render time
+export interface Tenure {
+  year: string;
+  slug: string;
   theme: string;
   description: string;
-  pastors: LeadershipPastor[];
+  bannerUrl: string;
+  executives: Executive[];
 }
 
 // ─── Mock / fallback data ────────────────────────────────────────────────────
 // These will be swapped for real Google Sheets URLs via env vars.
 // The shape of the CSV columns must remain stable for the swap to be seamless.
 
-const MOCK_TENURES_CSV = `Year,Theme,Description
-2025/2026,The Outpouring,A year characterized by revival and deep spiritual awakening across the campus.
-2024/2025,Deeply Rooted,Our focus was establishing strong foundations in the Word of God.`;
+const MOCK_TENURES_CSV = `Year,Theme,Description,BannerUrl
+2025/2026,The Tenure of His Manifest Glory,A year characterized by revival and deep spiritual awakening across the campus.,https://res.cloudinary.com/dpjo7lpww/image/upload/v1782603276/thmg-1_umnaxb.jpg
+`;
 
 const MOCK_PASTORS_CSV = `Year,Role,Name,PhotoUrl
-2025/2026,President,John Doe,https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80
-2025/2026,General Secretary,Jane Smith,https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80
-2024/2025,President,David Ojo,https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80`;
+2025/2026,President,Taiwo Tonade,https://res.cloudinary.com/dpjo7lpww/image/upload/v1782535779/taiwo_sjnvtt.jpg
+2025/2026,Vice President I & Workers Director,Iyanuoluwa Adeboye,
+2025/2026,Vice President II & Alumni Coordinator,Timilehin Alegbeleye,
+2025/2026,General Secretary,Oyinkansola Odunlade,https://res.cloudinary.com/dpjo7lpww/image/upload/v1782602802/oyinkansola_rie971.jpg
+`;
 
 // ─── Env-driven URLs (undefined → falls back to mock data above) ─────────────
 
-const TENURES_CSV_URL = process.env.LEADERSHIP_TENURES_CSV_URL;
-const PASTORS_CSV_URL = process.env.LEADERSHIP_PASTORS_CSV_URL;
+const TENURES_CSV_URL = process.env.TENURES_CSV_URL;
+const EXECUTIVES_CSV_URL = process.env.EXECUTIVES_CSV_URL;
 
-export const LEADERSHIP_ARCHIVE_TAG = "leadership-archive";
+export const TENURE_TAG = "leadership-archive";
 
-// ─── Core fetch & parse (unwrapped) ─────────────────────────────────────────
-
-async function fetchLeadershipArchive(): Promise<LeadershipTenure[]> {
+async function fetchTenures(): Promise<Tenure[]> {
   const [tenureRows, pastorRows] = await Promise.all([
     fetchAndParseCSV(TENURES_CSV_URL, {
       fallbackCsvText: MOCK_TENURES_CSV,
-      tags: [LEADERSHIP_ARCHIVE_TAG],
+      tags: [TENURE_TAG],
     }),
-    fetchAndParseCSV(PASTORS_CSV_URL, {
+    fetchAndParseCSV(EXECUTIVES_CSV_URL, {
       fallbackCsvText: MOCK_PASTORS_CSV,
-      tags: [LEADERSHIP_ARCHIVE_TAG],
+      tags: [TENURE_TAG],
     }),
   ]);
 
-  // Index pastors by Year for O(1) join
-  const pastorsByYear = new Map<string, LeadershipPastor[]>();
+  const executivesByYear = new Map<string, Executive[]>();
   for (const row of pastorRows) {
     const year = row["Year"] ?? "";
-    if (!pastorsByYear.has(year)) pastorsByYear.set(year, []);
-    pastorsByYear.get(year)!.push({
+    if (!executivesByYear.has(year)) executivesByYear.set(year, []);
+    executivesByYear.get(year)!.push({
       name: row["Name"] ?? "",
       role: row["Role"] ?? "",
       photoUrl: row["PhotoUrl"] ?? "",
     });
   }
 
-  const tenures: LeadershipTenure[] = tenureRows.map((row) => {
+  const tenures: Tenure[] = tenureRows.map((row) => {
     const year = row["Year"] ?? "";
+    const theme = row["Theme"] ?? "";
     return {
       year,
-      // Slug is derived exactly once — here at parse time.
-      slug: year.replace("/", "-"),
-      theme: row["Theme"] ?? "",
+      slug: theme.replace(" ", "-").toLowerCase(),
+      theme,
       description: row["Description"] ?? "",
-      pastors: pastorsByYear.get(year) ?? [],
+      bannerUrl: row["BannerUrl"] ?? "",
+      executives: executivesByYear.get(year) ?? [],
     };
   });
 
@@ -82,10 +81,8 @@ async function fetchLeadershipArchive(): Promise<LeadershipTenure[]> {
   return tenures;
 }
 
-// ─── Cached public export ────────────────────────────────────────────────────
-
-export const getLeadershipArchive = unstable_cache(
-  fetchLeadershipArchive,
+export const getTenures = unstable_cache(
+  fetchTenures,
   ["leadership-archive"],
-  { tags: [LEADERSHIP_ARCHIVE_TAG] },
+  { tags: [TENURE_TAG] },
 );
