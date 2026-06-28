@@ -11,9 +11,11 @@ import { Dialog as SheetPrimitive } from "radix-ui";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
@@ -37,6 +39,7 @@ export const NAV_SCROLL_CONFIG: Record<
   number | "100vh" | (() => number)
 > = {
   "/": "100vh",
+  "/about": 40 * 16,
 };
 
 // ---------------------------------------------------------------------------
@@ -130,33 +133,33 @@ export function Navigation() {
                   <Link href="/about">Who are we?</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem> */}
-              {/* <NavigationMenuItem>
+              <NavigationMenuItem>
                 <NavigationMenuTrigger>Who are we?</NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent className="rounded-xl">
                   <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                    <li className="row-span-3">
+                    <li className="row-span-2">
                       <NavigationMenuLink asChild>
                         <Link
-                          className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-4 no-underline outline-hidden transition-all duration-200 select-none focus:shadow-md md:p-6"
+                          className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-xl bg-linear-to-b px-4 no-underline outline-hidden transition-all duration-200 select-none focus:shadow-md md:px-6 md:py-2"
                           href="/about"
                         >
-                          <div className="mb-2 text-lg font-medium sm:mt-4">
+                          <div className="text-lg font-medium">
                             Who are we?
                           </div>
                           <p className="text-muted-foreground text-sm leading-tight">
-                            One family!
+                            The Chosen Generation
                           </p>
                         </Link>
                       </NavigationMenuLink>
                     </li>
-                    <ListItem href="/docs" title="Our story"></ListItem>
+                    <ListItem href="/about#our-story" title="Our story"></ListItem>
                     <ListItem
                       href="/about#executives"
                       title="The Executives"
                     ></ListItem>
                   </ul>
                 </NavigationMenuContent>
-              </NavigationMenuItem> */}
+              </NavigationMenuItem>
 
               {/* <NavigationMenuItem>
                 <NavigationMenuLink
@@ -208,30 +211,14 @@ export function Navigation() {
               </NavigationMenuContent>
             </NavigationMenuItem>*/}
 
-              {/*<NavigationMenuItem className="hidden md:block">
-              <NavigationMenuTrigger>Support</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[200px] gap-4">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link href="#">
-                        <div className="font-medium">Why we give</div>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link href="#">
-                        <div className="font-medium">Offerings & Tithes</div>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link href="#">
-                        <div className="font-medium">Donate to our projects</div>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>*/}
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  asChild
+                  className={navigationMenuTriggerStyle()}
+                >
+                  <Link href="/give">Give</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
 
               <NavigationMenuItem>
                 <NavigationMenuLink
@@ -256,7 +243,7 @@ export function Navigation() {
 function NavigationDialog() {
   const [open, setOpen] = React.useState(false);
   const linkClassName =
-    "font-display font-black tracking-tighter text-3xl md:text-5xl text-white md:text-white/80 hover:text-white data-[active=true]:text-primary data-[active=true]:hover:text-primary uppercase";
+    "font-display font-black tracking-tighter text-2xl md:text-4xl text-white md:text-white/80 hover:text-white data-[active=true]:text-primary data-[active=true]:hover:text-primary uppercase";
   const close = () => setOpen(false);
 
   return (
@@ -289,15 +276,30 @@ function NavigationDialog() {
               <NavLink href="/" className={linkClassName} onClick={close}>
                 Home
               </NavLink>
-              {/* <NavLink href="/about" className={linkClassName} onClick={close}>
+              <NavLink href="/about" className={linkClassName} onClick={close}>
                 Who are we?
-              </NavLink> */}
+              </NavLink>
+              <div className="ml-4 flex flex-col gap-2">
+                <NavLink href="/about#our-story" className={cn(linkClassName, "font-medium")} onClick={close}>
+                  Our Story
+                </NavLink>
+                <NavLink href="/about#executives" className={cn(linkClassName, "font-medium")} onClick={close}>
+                  The Executives
+                </NavLink>
+              </div>
               <NavLink
                 href="/sermons"
                 className={linkClassName}
                 onClick={close}
               >
                 Sermons
+              </NavLink>
+              <NavLink
+                href="/give"
+                className={linkClassName}
+                onClick={close}
+              >
+                Give
               </NavLink>
               <NavLink href="/ql" className={linkClassName} onClick={close}>
                 Links
