@@ -17,6 +17,36 @@ export const metadata: Metadata = {
     "Support RCF UNILAG through generous giving. We give because He first gave.",
 };
 
+function AccountCard({
+  label,
+  account,
+  bankName,
+  icon
+}: {
+  label: string;
+  account: string;
+  bankName: string;
+  icon?: React.ReactNode;
+}) {
+  return (
+    <div className="group flex flex-col w-full gap-6 px-6 py-4 bg-white border border-border rounded-xl shadow-xs transition-all duration-200">
+      <div className="flex items-center gap-2">
+        {icon && icon}
+        <span className="font-medium text-sm">{label}</span>
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-baseline gap-3">
+          <h2 className="text-4xl font-semibold">{account}</h2>
+          <CopyButton value={account} />
+        </div>
+        <p className="text-sm text-muted-foreground">
+          {bankName}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default async function Page() {
   const projects = await getGivingProjects();
   // For now we only have one project — the 1k from 1k initiative.
@@ -35,21 +65,8 @@ export default async function Page() {
       {/* Account cards */}
       <div className="section">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          <div className="group flex flex-col w-full gap-6 px-6 py-4 bg-white border border-border rounded-xl shadow-xs transition-all duration-200">
-            <div className="flex items-center gap-2">
-              <Building2 size={16} />
-              <span className="font-medium text-sm">Project Account</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-baseline gap-3">
-                <h2 className="text-4xl font-semibold">0123456789</h2>
-                <CopyButton value="0123456789" />
-              </div>
-              <div className="font-medium text-foreground text-sm transition-all duration-200">
-                United Bank for Africa
-              </div>
-            </div>
-          </div>
+          <AccountCard label="Tithes & Offerings" account="1020269239" bankName="United Bank for Africa (UBA)" icon={<Building2 size={16} />} />
+          <AccountCard label="Projects" account="1013422102" bankName="Zenith Bank" icon={<Building2 size={16} />} />
         </div>
       </div>
 

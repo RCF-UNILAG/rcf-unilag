@@ -90,10 +90,16 @@ export function CurrentTenureSection({ tenure }: CurrentTenureSectionProps) {
             slides={[
               // Slide 1: President portrait
               {
-                type: "president",
+                type: "badged-image",
                 photoUrl: president?.photoUrl,
                 name: president?.name,
                 role: president?.role,
+              },
+              {
+                type: "badged-image",
+                photoUrl: "https://res.cloudinary.com/dpjo7lpww/image/upload/v1782633721/glorious4_pcktuh.jpg",
+                name: "The Glorious 4",
+                role: "Presidency",
               },
               // Slide 2: Tenure banner image (only when one is set)
               ...(tenure.bannerUrl

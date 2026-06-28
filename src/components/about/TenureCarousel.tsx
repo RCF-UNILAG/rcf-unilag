@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 
 interface TenureCarouselSlide {
-  type: "president" | "banner-image" | "banner-text";
+  type: "badged-image" | "banner-image" | "banner-text";
   photoUrl?: string;
   name?: string;
   role?: string;
@@ -50,7 +50,7 @@ export function TenureCarousel({ slides }: TenureCarouselProps) {
         <CarouselContent className="-ml-0">
           {slides.map((slide, i) => (
             <CarouselItem key={i} className="pl-0">
-              {slide.type === "president" && (
+              {slide.type === "badged-image" && (
                 <div className="relative aspect-[3/4] w-full bg-muted/10 rounded-sm overflow-hidden">
                   {/* Role badge */}
                   <div className="absolute top-4 left-4 z-10 bg-secondary text-secondary-foreground text-xs font-semibold uppercase tracking-widest px-3 py-1.5">
