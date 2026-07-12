@@ -64,6 +64,8 @@ export default async function Home() {
 
       <WeAreRCFSection />
 
+      <ChakamChallengeSection />
+
       {/* Latest Sermons Section */}
       <section className="bg-[#EAD9EE]">
         <div className="section text-center flex flex-col gap-9">
@@ -219,6 +221,60 @@ export function WeAreRCFSection() {
           {pillars.map((pillar) => (
             <PillarCard key={pillar.title} {...pillar} />
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ChakamChallengeSection() {
+  return (
+    <section className="bg-primary/10">
+      <div className="section flex flex-col gap-10 text-center">
+        <div className="flex flex-col gap-4 items-center">
+          <Badge
+            variant="outline"
+            className="bg-accent/10 border-foreground text-foreground uppercase py-2 px-6 gap-2 sm:text-base"
+          >
+            <Flower className="size-6! text-foreground" />
+            Brothers & Sisters Week
+            <Flower className="size-6! text-foreground" />
+          </Badge>
+          <h2 className="text-5xl md:text-6xl font-bold font-display tracking-tighter">
+            Chakam Challenge
+          </h2>
+          <p className="max-w-2xl">
+            A drive for love among workers and members in RCF Fellowship.
+            Take as many selfies as you can with fellow RCF UNILAG members at
+            any of our meetings this week — and stand a chance to win!
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto text-left">
+          <div className="bg-white/60 rounded-2xl p-6 flex flex-col gap-2">
+            <span className="text-3xl font-bold font-display">1 Point</span>
+            <p>For every selfie you take with a fellow member.</p>
+          </div>
+          <div className="bg-white/60 rounded-2xl p-6 flex flex-col gap-2">
+            <span className="text-3xl font-bold font-display">2 Points</span>
+            <p>For a group selfie (minimum of 4 people).</p>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <p className="font-bold">
+            Deadline: Submit all pictures before 9:00 PM, Saturday 18th July.
+          </p>
+          <p>
+            Winner announced Sunday — walks away with a cash prize of{" "}
+            <span className="font-bold">₦10,000</span>!
+          </p>
+        </div>
+
+        <div className="flex gap-2 md:gap-4 items-center justify-center">
+          <Link href="/ql/chakam" target="_blank">
+            <Button size="lg" variant="black">Upload Your Selfies</Button>
+          </Link>
         </div>
       </div>
     </section>
