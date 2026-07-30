@@ -12,12 +12,10 @@ import {
 import { cn } from "@/lib/utils";
 
 interface TenureCarouselSlide {
-  type: "badged-image" | "banner-image" | "banner-text";
+  type: "badged-image" | "banner-image";
   photoUrl?: string;
   name?: string;
   role?: string;
-  theme?: string;
-  year?: string;
   imageUrl?: string;
 }
 
@@ -118,28 +116,6 @@ export function TenureCarousel({ slides }: TenureCarouselProps) {
                 </div>
               )}
 
-              {slide.type === "banner-text" && (
-                <div className="aspect-[3/4] w-full border border-background/10 bg-background/5 rounded-sm flex flex-col items-center justify-center text-center gap-4 p-8">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-secondary">
-                    Doxa 45
-                  </p>
-                  <h3 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-background leading-none">
-                    Phaneros Doxa
-                  </h3>
-                  <p className="font-display italic text-base text-background/50">
-                    {slide.theme}
-                  </p>
-                  <span
-                    className="block h-px w-10 bg-secondary"
-                    aria-hidden="true"
-                  />
-                  {slide.year && (
-                    <p className="text-xs text-background/30 uppercase tracking-widest font-medium mt-2">
-                      {slide.year}
-                    </p>
-                  )}
-                </div>
-              )}
             </CarouselItem>
           ))}
         </CarouselContent>

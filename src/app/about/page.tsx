@@ -6,8 +6,8 @@ import {
   ScriptureBanner,
   MissionVisionSection,
   PillarsSection,
-  CurrentTenureSection,
-  MeetTheTeamSection,
+  TenureStorySection,
+  TenureTeamSection,
 } from "@/components/about";
 
 export const metadata: Metadata = {
@@ -58,7 +58,7 @@ export default async function About() {
       {/* ── Our Story ────────────────────────────────────────────────────── */}
       <StorySection />
 
-      {/* ── Scripture Banner (1 Peter 2:9) ───────────────────────────────── */}
+      {/* ── Scripture Banner ─────────────────────────────────────────────── */}
       <ScriptureBanner />
 
       {/* ── Mission & Vision ─────────────────────────────────────────────── */}
@@ -67,15 +67,12 @@ export default async function About() {
       {/* ── Three Pillars ─────────────────────────────────────────────────── */}
       <PillarsSection />
 
-      {/* ── Current Tenure (Phaneros Doxa) ───────────────────────────────── */}
-      {currentTenure && <CurrentTenureSection tenure={currentTenure} />}
+      {/* ── Current Tenure ────────────────────────────────────────────────── */}
+      {currentTenure && <TenureStorySection tenure={currentTenure} />}
 
       {/* ── Meet the Team ─────────────────────────────────────────────────── */}
       {currentTenure && (
-        <MeetTheTeamSection
-          executives={currentTenure.executives}
-          tenureYear={currentTenure.year}
-        />
+        <TenureTeamSection tenure={currentTenure} isCurrent />
       )}
     </div>
   );
