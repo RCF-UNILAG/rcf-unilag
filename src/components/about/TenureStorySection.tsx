@@ -1,11 +1,14 @@
 import type { Tenure } from "@/lib/archive";
 import { TenureCarousel } from "./TenureCarousel";
+import { cn } from "@/lib/utils";
+import { parseSpeechBlocks, renderSpeechInline } from "@/lib/speech-markdown";
 
 interface TenureStorySectionProps {
   tenure: Tenure;
+  className?: string;
 }
 
-export function TenureStorySection({ tenure }: TenureStorySectionProps) {
+export function TenureStorySection({ tenure, className }: TenureStorySectionProps) {
   const president = tenure.executives.find(
     (e) => e.role.toLowerCase() === "president",
   ) ?? tenure.executives[0];
@@ -14,19 +17,11 @@ export function TenureStorySection({ tenure }: TenureStorySectionProps) {
   // (e.g. older tenures added before this field existed), so the copy column
   // never sits empty.
   const bodyText = tenure.speech.trim() || tenure.description.trim();
-  const paragraphs = bodyText
-    .split(/\n\s*\n/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-  const hasBody = paragraphs.length > 0 || Boolean(tenure.pullQuote);
-
-  // When no dedicated Name was set, archive.ts falls back to using the theme
-  // as the name — so name and theme are identical. Showing both as heading
-  // and subtitle would just repeat the same words, so drop the subtitle.
-  const hasDistinctSubtitle = tenure.theme && tenure.theme !== tenure.name;
+  const blocks = parseSpeechBlocks(bodyText);
+  const hasBody = blocks.length > 0;
 
   return (
-    <section className="bg-foreground">
+    <section className={cn("bg-foreground", className)}>
       <div className="section">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* ── Left column — copy ───────────────────────────────────────── */}
@@ -42,9 +37,9 @@ export function TenureStorySection({ tenure }: TenureStorySectionProps) {
             {/* Heading + subtitle */}
             <div className="flex flex-col gap-2">
               <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl tracking-tighter leading-none text-background">
-                {tenure.name}
+                {tenure.name ?? tenure.theme}
               </h2>
-              {hasDistinctSubtitle && (
+              {tenure.name && (
                 <p className="font-display italic text-lg text-background/50">
                   {tenure.theme}
                 </p>
@@ -53,22 +48,23 @@ export function TenureStorySection({ tenure }: TenureStorySectionProps) {
 
             {hasBody && <div className="border-t border-background/10" />}
 
-            {/* Body copy */}
-            {paragraphs.length > 0 && (
-              <div className="flex flex-col gap-5 text-sm text-background/60 leading-relaxed">
-                {paragraphs.map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
+            {/* Body copy — paragraphs and blockquotes (the pull quote), in the order they appear in the speech. */}
+            {blocks.length > 0 && (
+              <div className="flex flex-col gap-5">
+                {blocks.map((block, i) =>
+                  block.type === "blockquote" ? (
+                    <blockquote key={i} className="border-l-4 border-secondary pl-5 py-1">
+                      <p className="italic text-background/80 leading-relaxed text-sm">
+                        &ldquo;{renderSpeechInline(block.text, `bq-${i}`)}&rdquo;
+                      </p>
+                    </blockquote>
+                  ) : (
+                    <p key={i} className="text-sm text-background/60 leading-relaxed">
+                      {renderSpeechInline(block.text, `p-${i}`)}
+                    </p>
+                  ),
+                )}
               </div>
-            )}
-
-            {/* Blockquote */}
-            {tenure.pullQuote && (
-              <blockquote className="border-l-4 border-secondary pl-5 py-1">
-                <p className="italic text-background/80 leading-relaxed text-sm">
-                  &ldquo;{tenure.pullQuote}&rdquo;
-                </p>
-              </blockquote>
             )}
 
             {/* Divider + sign-off */}
@@ -80,7 +76,7 @@ export function TenureStorySection({ tenure }: TenureStorySectionProps) {
                     {president.name}
                   </p>
                   <p className="text-xs text-background/40 uppercase tracking-widest font-medium">
-                    {president.role}, RCF UNILAG · {tenure.year}
+                    {president.role}, RCF UNILAG · {tenure.period}
                   </p>
                 </div>
               </div>

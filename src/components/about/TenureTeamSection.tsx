@@ -28,12 +28,12 @@ function PersonPlaceholder() {
 }
 
 export function TenureTeamSection({ tenure, isCurrent }: TenureTeamSectionProps) {
-  const { executives, cohortName, year } = tenure;
+  const { executives, cohortName, period } = tenure;
   const teamDescription =
     tenure.teamDescription ||
     (cohortName
-      ? `${cohortName} is the executive council of RCF UNILAG for ${year}.`
-      : `The executive council of RCF UNILAG for ${year}.`);
+      ? `${cohortName} is the executive council of RCF UNILAG for ${period}.`
+      : `The executive council of RCF UNILAG for ${period}.`);
 
   return (
     <section id="executives" className="bg-muted">
@@ -42,7 +42,7 @@ export function TenureTeamSection({ tenure, isCurrent }: TenureTeamSectionProps)
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                {isCurrent ? `Current Tenure · ${year}` : `${year} Tenure`}
+                {isCurrent ? `Current Tenure · ${period}` : `${period} Tenure`}
               </span>
             </div>
             <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tighter text-foreground">
