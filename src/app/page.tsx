@@ -5,64 +5,21 @@ import Link from "next/link";
 import { HandwrittenCircle } from "./animated-circle";
 import { getSermons } from "@/lib/sermons";
 import { SermonCard } from "@/components/sermon-card";
-import { getSiteSettings, SiteSettings } from "@/lib/settings";
+import { getSiteContent, SiteContent } from "@/lib/site-content";
 import { SocialLinks } from "@/components/social-links";
 import { PillarCard } from "@/components/pillar-card";
 import Image from "next/image";
 
-const backgroundUrl = "https://res.cloudinary.com/dpjo7lpww/image/upload/v1781396846/4cce8efd6dfc1f090d1bd130ffa0ed7a3a925264_vtomzv.jpg";
-
-const pillars = [
-  {
-    title: "The Word",
-    description:
-      "At RCF UNILAG, the Word is our ultimate compass. We grow in the knowledge of scripture and apply it daily to become formidable believers. Our Sunday Services and Bible Studies are deeply anchored in this truth.",
-    image:
-      "/images/pillar-word.jpg",
-    ctaLabel: "Watch Sermons",
-    ctaHref: "/sermons",
-    orientation: "image-left" as const,
-  },
-  {
-    title: "Love",
-    description: "At RCF UNILAG, the love of Christ is our native language. You were not meant to navigate university life alone. Here, you will experience love in action—a supportive family that prays with you, carries your burdens, and does life together.",
-    image:
-      "/images/pillar-love.jpg",
-    ctaLabel: "Join our Community",
-    ctaHref: "/ql/become-a-member",
-    orientation: "image-right" as const,
-  },
-  {
-    title: "Excellence",
-    description: "At RCF UNILAG, we believe academic excellence is a spiritual responsibility. With God's help and our diligent Academic Unit, we provide the study materials and support you need to achieve excellent grades.",
-    image:
-      "/images/pillar-excellence.png",
-    // ctaLabel: "Check Achievements",
-    // ctaHref: "/about",
-    orientation: "image-left" as const,
-  },
-  // {
-  //   title: "Prayer",
-  //   description:
-  //     "Prayer is the heartbeat of RCF UNILAG. From our weekly Divine Encounter nights to personal intercession, we cultivate a culture of dependence on God, believing He moves mountains in response to the prayers of His people.",
-  //   image:
-  //     "https://rcfunilag.com/wp-content/uploads/2023/05/Snapinsta.app_345309011_740436354489814_8763262030661234831_n_1024-e1685062328403.jpg.webp",
-  //   ctaLabel: "Drop Prayer Requests",
-  //   ctaHref: "/prayer",
-  //   orientation: "image-right" as const,
-  // },
-];
-
 export default async function Home() {
-  const settings = await getSiteSettings();
+  const content = await getSiteContent();
   const sermons = await getSermons();
   const latestSermons = sermons.slice(0, 3);
 
   return (
     <div>
-      <Hero settings={settings} />
+      <Hero content={content} />
 
-      <WeAreRCFSection />
+      <WeAreRCFSection content={content} />
 
       {/* Latest Sermons Section */}
       <section className="bg-[#EAD9EE]">
@@ -74,17 +31,17 @@ export default async function Home() {
             </p>
           </div>
           <div className="flex flex-col gap-2 md:flex-row items-center gap-4 justify-center">
-            <Link href="/ql/become-a-member" target="_blank">
+            <Link href={content.link_become_a_member || "/ql/become-a-member"} target="_blank">
               <Button size="lg" variant="black">Attend In Person</Button>
             </Link>
-            <Link href="https://www.youtube.com/@rcfunilagtv" target="_blank">
+            <Link href={content.link_youtube_live || "https://www.youtube.com/@rcfunilagtv"} target="_blank">
               <Button size="lg" variant="white">Join Online</Button>
             </Link>
           </div>
         </div>
         <div className="h-[480px] relative w-full">
           <Image
-            src="https://res.cloudinary.com/dpjo7lpww/image/upload/v1781396840/15d9f3f201166fa93ac1067d4f244211d3fcbaba_1_t0tx5x.jpg"
+            src={content.home_sunday_image || "https://res.cloudinary.com/dpjo7lpww/image/upload/v1781396840/15d9f3f201166fa93ac1067d4f244211d3fcbaba_1_t0tx5x.jpg"}
             alt="RCF UNILAG Sunday Service"
             fill
             className="object-cover"
@@ -118,7 +75,9 @@ export default async function Home() {
 }
 
 
-export function Hero({ settings }: { settings: SiteSettings }) {
+export function Hero({ content }: { content: SiteContent }) {
+  const backgroundUrl = content.home_hero_image || "https://res.cloudinary.com/dpjo7lpww/image/upload/v1781396846/4cce8efd6dfc1f090d1bd130ffa0ed7a3a925264_vtomzv.jpg";
+
   return (
     <div className="relative">
       <div
@@ -158,7 +117,7 @@ export function Hero({ settings }: { settings: SiteSettings }) {
           </div>
           <div className="flex gap-2 md:gap-4 items-center">
             <Button asChild size="lg">
-              <Link href="/ql/become-a-member" target="_blank">
+              <Link href={content.link_become_a_member || "/ql/become-a-member"} target="_blank">
                 Join Us
               </Link>
             </Button>
@@ -186,7 +145,7 @@ export function Hero({ settings }: { settings: SiteSettings }) {
           </div>
           <div className="flex gap-2 items-center">
             <span>Connect with us:</span>
-            <SocialLinks settings={settings} className="flex items-center gap-4" />
+            <SocialLinks content={content} className="flex items-center gap-4" />
           </div>
         </div>
       </div>
@@ -194,7 +153,33 @@ export function Hero({ settings }: { settings: SiteSettings }) {
   )
 }
 
-export function WeAreRCFSection() {
+export function WeAreRCFSection({ content }: { content: SiteContent }) {
+  const pillars = [
+    {
+      title: "The Word",
+      description:
+        "At RCF UNILAG, the Word is our ultimate compass. We grow in the knowledge of scripture and apply it daily to become formidable believers. Our Sunday Services and Bible Studies are deeply anchored in this truth.",
+      image: content.pillar_word_image || "/images/pillar-word.jpg",
+      ctaLabel: "Watch Sermons",
+      ctaHref: "/sermons",
+      orientation: "image-left" as const,
+    },
+    {
+      title: "Love",
+      description: "At RCF UNILAG, the love of Christ is our native language. You were not meant to navigate university life alone. Here, you will experience love in action—a supportive family that prays with you, carries your burdens, and does life together.",
+      image: content.pillar_love_image || "/images/pillar-love.jpg",
+      ctaLabel: "Join our Community",
+      ctaHref: content.link_become_a_member || "/ql/become-a-member",
+      orientation: "image-right" as const,
+    },
+    {
+      title: "Excellence",
+      description: "At RCF UNILAG, we believe academic excellence is a spiritual responsibility. With God's help and our diligent Academic Unit, we provide the study materials and support you need to achieve excellent grades.",
+      image: content.pillar_excellence_image || "/images/pillar-excellence.png",
+      orientation: "image-left" as const,
+    },
+  ];
+
   return (
     <section className="bg-muted">
       <div className="section flex flex-col gap-24">

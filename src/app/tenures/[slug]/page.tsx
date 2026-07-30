@@ -20,7 +20,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${tenure.name} — ${tenure.year} | RCF UNILAG`,
+    title: `${tenure.name} — ${tenure.period} | RCF UNILAG`,
     description: tenure.description,
   };
 }

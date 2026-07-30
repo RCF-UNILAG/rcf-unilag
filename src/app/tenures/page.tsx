@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { getTenures } from "@/lib/archive";
-import { Timeline } from "@/components/tenure-timeline";
+import { TenureTimeline } from "@/components/tenure-timeline";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -14,19 +14,20 @@ export default async function ArchivePage() {
   const tenures = await getTenures();
 
   const data = tenures.map((tenure) => ({
-    title: tenure.year,
+    // e.g. "2026" or "August, 2026" — the timeline reads cleaner with just the end date.
+    title: tenure.endLabel,
     content: (
       <Link href={`/tenures/${tenure.slug}`} className="block group">
-        <h2 className="mb-2 text-2xl md:text-4xl font-semibold group-hover:underline">
-          {tenure.name}
+        <h2 className="mb-2 text-4xl font-semibold group-hover:underline">
+          {tenure.name ?? tenure.theme}
         </h2>
-        {tenure.theme && (
+        {tenure.name && (
           <p className="mb-4 font-normal italic text-sm md:text-base text-muted-foreground">
             {tenure.theme}
           </p>
         )}
         {tenure.description && (
-          <p className="mb-8 font-normal text-sm md:text-base text-muted-foreground">
+          <p className="mb-8 font-normal text-base text-muted-foreground">
             {tenure.description}
           </p>
         )}
@@ -37,7 +38,7 @@ export default async function ArchivePage() {
               alt={tenure.name}
               width={2160}
               height={2700}
-              className="w-full h-auto rounded-lg"
+              className="w-full max-w-xl h-auto rounded-lg"
             />
           </div>
         )}
@@ -47,17 +48,16 @@ export default async function ArchivePage() {
 
   return (
     <div className="min-h-screen bg-white pt-16">
-      <div className="section">
-        <h1 className="font-semibold text-2xl md:text-5xl mb-4 max-w-4xl">
-          See how RCF UNILAG has transited from one tenure to another.
+      <div className="section pb-1 md:pb-6 flex flex-col gap-2">
+        <h1 className="font-display font-bold text-4xl md:text-5xl max-w-5xl uppercase text-balance">
+          A timeline of every season
         </h1>
-        <p className="text-sm md:text-base max-w-sm">
-          A timeline of every season RCF UNILAG has walked through — tap a
-          tenure to read its full story.
+        <p className="text-base max-w-xl">
+          The Fellowship has gone through several seasons since 1986.
         </p>
       </div>
       <div className="section">
-        <Timeline data={data} />
+        <TenureTimeline data={data} />
       </div>
     </div>
   );

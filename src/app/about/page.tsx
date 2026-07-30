@@ -1,6 +1,8 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { getTenures } from "@/lib/archive";
+import { Button } from "@/components/ui/button";
 import {
   StorySection,
   ScriptureBanner,
@@ -74,6 +76,13 @@ export default async function About() {
       {currentTenure && (
         <TenureTeamSection tenure={currentTenure} isCurrent />
       )}
+
+      {/* ── Explore Past Tenures ─────────────────────────────────────────── */}
+      <div className="bg-muted pb-24 flex justify-center">
+        <Button asChild size="lg" variant="black">
+          <Link href="/tenures">See Past Tenures</Link>
+        </Button>
+      </div>
     </div>
   );
 }
