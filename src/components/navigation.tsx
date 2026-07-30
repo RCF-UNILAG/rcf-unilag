@@ -137,7 +137,7 @@ export function Navigation() {
                 <NavigationMenuTrigger>Who are we?</NavigationMenuTrigger>
                 <NavigationMenuContent className="rounded-xl">
                   <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                    <li className="row-span-2">
+                    <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <Link
                           className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-xl bg-linear-to-b px-4 no-underline outline-hidden transition-all duration-200 select-none focus:shadow-md md:px-6 md:py-2"
@@ -156,6 +156,10 @@ export function Navigation() {
                     <ListItem
                       href="/about#executives"
                       title="The Executives"
+                    ></ListItem>
+                    <ListItem
+                      href="/tenures"
+                      title="Past Tenures"
                     ></ListItem>
                   </ul>
                 </NavigationMenuContent>
@@ -285,6 +289,9 @@ function NavigationDialog() {
                 </NavLink>
                 <NavLink href="/about#executives" className={cn(linkClassName, "font-medium")} onClick={close}>
                   The Executives
+                </NavLink>
+                <NavLink href="/tenures" className={cn(linkClassName, "font-medium")} onClick={close}>
+                  Past Tenures
                 </NavLink>
               </div>
               <NavLink
