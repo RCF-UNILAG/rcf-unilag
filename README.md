@@ -49,6 +49,12 @@ NEXT_PUBLIC_SERMONS_CSV_URL=
 # Public CSV export URL for the Quick Links spreadsheet
 NEXT_PUBLIC_QL_CSV_URL=
 
+# Public CSV export URL for the Tenures spreadsheet
+TENURES_CSV_URL=
+
+# Public CSV export URL for the Executives spreadsheet
+EXECUTIVES_CSV_URL=
+
 # Secret token used to trigger on-demand cache revalidation
 REVALIDATION_SECRET=your-secret-here
 ```
@@ -74,10 +80,11 @@ npm run start
 
 ## CSV Setup
 
-The site fetches live data from **Google Sheets** published as CSV. There are two data sources:
+The site fetches live data from **Google Sheets** published as CSV. Data sources:
 
 - **Sermons** — powers the `/sermons` page
 - **Quick Links** — powers the `/ql` links page
+- **Tenures** and **Executives** — power the `/about` and `/tenures/[slug]` pages (see [Starting a New Tenure](#starting-a-new-tenure))
 
 ### How to get the public CSV URL from Google Sheets
 
@@ -143,6 +150,50 @@ Timestamp,Link Title,Destination URL,Slug,Icon (Emoji),Is Active,Display Order
 
 ---
 
+### Tenures Sheet
+
+Each row represents one academic-year leadership season (a "tenure"). Powers the current-tenure section on `/about` (the newest `Year`) and every tenure's own page at `/tenures/[slug]`.
+
+| Column | Description | Example |
+|---|---|---|
+| `Year` | Academic year, `YYYY/YYYY` format. Used to join with the Executives sheet and to sort tenures (newest first). | `2025/2026` |
+| `Name` | Short motto/badge — the page's main heading. Also used to generate the page's URL slug. | `Phaneros Doxa` |
+| `Theme` | One-sentence description of the theme, shown as a subtitle. | `The Tenure of His Manifest Glory` |
+| `Description` | Short summary, used on the `/tenures` timeline and page metadata. | `A year characterized by revival and deep spiritual awakening across the campus.` |
+| `Speech` | The president's speech / theme reflection. To start a new paragraph, press **Alt+Enter** (Windows) or **⌥+Enter** (Mac) inside the cell instead of just Enter — a blank line between paragraphs is what splits them into separate paragraphs on the page. | `Every time God gives a theme to a people...` |
+| `PullQuote` | Optional short quote highlighted in a blockquote. Leave blank to hide it. | `One thing is clear: nobody truly encounters the Glory of God and remains ordinary.` |
+| `CohortName` | The executive council's name, used for the "Meet {CohortName}" heading. | `Doxa 45` |
+| `TeamDescription` | Blurb shown under the "Meet the Team" heading. Leave blank for a generic auto-generated sentence. | `Doxa 45 is the forty-fifth executive council of RCF UNILAG...` |
+| `BannerUrl` | Main banner/cover image for the tenure. | `https://res.cloudinary.com/.../banner.jpg` |
+| `GalleryUrls` | Optional extra carousel images. Separate multiple URLs with a pipe (`\|`). | `https://.../img1.jpg\|https://.../img2.jpg` |
+
+> Tenures are sorted by **Year** (newest first); the top one is treated as the fellowship's current tenure everywhere on the site.
+
+### Executives Sheet
+
+Each row is one executive, for one tenure. A tenure with no matching rows here still gets a page — it just shows "No leadership details recorded for this tenure" instead of a picture grid.
+
+| Column | Description | Example |
+|---|---|---|
+| `Year` | Must exactly match a `Year` in the Tenures sheet. | `2025/2026` |
+| `Role` | The executive's office/title. A row with `Role` = `President` (case-insensitive) is used as the tenure's featured portrait and speech sign-off. | `President` |
+| `Name` | Full name. | `Taiwo Tonade` |
+| `PhotoUrl` | Headshot image. Leave blank to show a placeholder icon. | `https://res.cloudinary.com/.../taiwo.jpg` |
+
+### Starting a New Tenure
+
+When a tenure ends, no code changes or deploys are needed — just add data:
+
+1. Add one new row to the **Tenures** sheet for the incoming `Year`, filling in at least `Year`, `Name`, and `Theme`.
+2. Add one row per executive to the **Executives** sheet with that same `Year`.
+3. [Revalidate](#cache-revalidation) the `leadership-archive` tag (or wait up to an hour for the cache to expire).
+
+The new row automatically becomes "current" on `/about` (tenures are sorted newest-first by
+`Year`), and the outgoing tenure automatically drops into the archive at its own
+`/tenures/[slug]` page — with the same full treatment (speech, quote, photo grid) it always had.
+
+---
+
 ## Cache Revalidation
 
 Data from the Google Sheets CSV is cached for **1 hour** using Next.js tag-based caching. To force an immediate refresh without redeploying, call the revalidation endpoint:
@@ -159,7 +210,7 @@ GET /api/revalidate?secret=YOUR_REVALIDATION_SECRET
 GET /api/revalidate?secret=YOUR_REVALIDATION_SECRET&tags=sermons,quick-links,site-settings
 ```
 
-Available tags: `sermons`, `quick-links`, `site-settings`
+Available tags: `sermons`, `quick-links`, `site-settings`, `leadership-archive`, `giving-projects`
 
 > The `secret` must match the `REVALIDATION_SECRET` value in your `.env` file. Requests with an incorrect secret will receive a `401 Unauthorized` response.
 
@@ -173,19 +224,22 @@ src/
 │   ├── page.tsx          # Home page
 │   ├── sermons/          # Sermons listing page
 │   ├── ql/               # Quick Links page
-│   ├── _about/           # About section
+│   ├── about/            # About section (current tenure)
+│   ├── tenures/          # Tenure archive index + per-tenure pages
 │   └── api/
 │       └── revalidate/   # On-demand cache revalidation endpoint
 ├── components/
 │   ├── navigation.tsx
 │   ├── footer.tsx
 │   ├── sermon-card.tsx
-│   └── quick-link-card.tsx
+│   ├── quick-link-card.tsx
+│   └── about/            # Tenure story/team sections, shared by /about and /tenures/[slug]
 └── lib/
     ├── csv.ts            # CSV fetch & parse utility
     ├── sermons.ts        # Sermon data fetching & types
     ├── quick-links.ts    # Quick links data fetching & types
-    └── settings.ts       # Site settings data fetching
+    ├── settings.ts       # Site settings data fetching
+    └── archive.ts        # Tenure & executive data fetching & types
 ```
 
 ---
