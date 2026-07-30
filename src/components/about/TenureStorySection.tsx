@@ -84,15 +84,21 @@ export function TenureStorySection({ tenure, className }: TenureStorySectionProp
           </div>
 
           {/* ── Right column — carousel ──────────────────────────────────── */}
+          {/* Keep this tight: president portrait, the banner, and at most the
+              first two gallery images — the full set lives in the gallery below. */}
           <TenureCarousel
             slides={[
-              // Slide 1: President portrait
-              {
-                type: "badged-image",
-                photoUrl: president?.photoUrl,
-                name: president?.name,
-                role: president?.role,
-              },
+              // Slide 1: President portrait (only when there is one)
+              ...(president?.photoUrl
+                ? [
+                  {
+                    type: "badged-image" as const,
+                    photoUrl: president.photoUrl,
+                    name: president.name,
+                    role: president.role,
+                  },
+                ]
+                : []),
               // Slide 2: Tenure banner image (only when one is set)
               ...(tenure.bannerUrl
                 ? [
@@ -102,8 +108,8 @@ export function TenureStorySection({ tenure, className }: TenureStorySectionProp
                   },
                 ]
                 : []),
-              // Additional gallery images, sheet-driven
-              ...tenure.galleryUrls.map((imageUrl) => ({
+              // First two gallery images, if any
+              ...tenure.galleryUrls.slice(0, 2).map((imageUrl) => ({
                 type: "banner-image" as const,
                 imageUrl,
               })),

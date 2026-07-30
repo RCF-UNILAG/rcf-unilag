@@ -4,7 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { getTenures } from "@/lib/tenure";
 import { Button } from "@/components/ui/button";
-import { TenureStorySection, TenureTeamSection } from "@/components/about";
+import { TenureStorySection, TenureTeamSection, TenureGallerySection } from "@/components/about";
 
 export async function generateMetadata({
   params,
@@ -42,10 +42,13 @@ export default async function TenureDetailPage({
   // Newest tenure (index 0) is the fellowship's current one.
   const isCurrent = tenures[0]?.slug === tenure.slug;
 
+  const galleryImages = [tenure.bannerUrl, ...tenure.galleryUrls].filter(Boolean);
+
   return (
     <div className="min-h-screen pt-16">
       <TenureStorySection tenure={tenure} className="bg-black" />
       <TenureTeamSection tenure={tenure} isCurrent={isCurrent} />
+      <TenureGallerySection images={galleryImages} />
     </div>
   );
 }
