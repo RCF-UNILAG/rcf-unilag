@@ -20,6 +20,11 @@ export function TenureStorySection({ tenure }: TenureStorySectionProps) {
     .filter(Boolean);
   const hasBody = paragraphs.length > 0 || Boolean(tenure.pullQuote);
 
+  // When no dedicated Name was set, archive.ts falls back to using the theme
+  // as the name — so name and theme are identical. Showing both as heading
+  // and subtitle would just repeat the same words, so drop the subtitle.
+  const hasDistinctSubtitle = tenure.theme && tenure.theme !== tenure.name;
+
   return (
     <section className="bg-foreground">
       <div className="section">
@@ -39,9 +44,11 @@ export function TenureStorySection({ tenure }: TenureStorySectionProps) {
               <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl tracking-tighter leading-none text-background">
                 {tenure.name}
               </h2>
-              <p className="font-display italic text-lg text-background/50">
-                {tenure.theme}
-              </p>
+              {hasDistinctSubtitle && (
+                <p className="font-display italic text-lg text-background/50">
+                  {tenure.theme}
+                </p>
+              )}
             </div>
 
             {hasBody && <div className="border-t border-background/10" />}
