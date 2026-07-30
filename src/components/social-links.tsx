@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SiteSettings } from "@/lib/settings";
+import { SiteContent } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
 
 interface SocialLinksProps {
-  settings: SiteSettings;
+  content: SiteContent;
   className?: string;
 }
 
-export function SocialLinks({ settings, className }: SocialLinksProps) {
+export function SocialLinks({ content, className }: SocialLinksProps) {
   const socialNetworks = [
     { key: "social_youtube", name: "YouTube", icon: "/brands/youtube.svg" },
     { key: "social_instagram", name: "Instagram", icon: "/brands/instagram.svg" },
@@ -19,7 +19,7 @@ export function SocialLinks({ settings, className }: SocialLinksProps) {
   return (
     <div className={cn("flex items-center gap-4", className)}>
       {socialNetworks.map((social) => {
-        const url = settings[social.key];
+        const url = content[social.key];
         if (!url) return null;
 
         return (

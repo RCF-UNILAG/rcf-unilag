@@ -2,7 +2,7 @@ import { TENURE_TAG } from '@/lib/archive';
 import { GIVING_TAG } from '@/lib/give';
 import { QUICK_LINK_TAG } from '@/lib/quick-links';
 import { SERMONS_TAG } from '@/lib/sermons';
-import { SITE_SETTINGS_TAG } from '@/lib/settings';
+import { SITE_CONTENT_TAG } from '@/lib/site-content';
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     });
 
   } else {
-    revalidateTag(SITE_SETTINGS_TAG, 'max');
+    revalidateTag(SITE_CONTENT_TAG, 'max');
     revalidateTag(QUICK_LINK_TAG, 'max');
     revalidateTag(SERMONS_TAG, 'max');
     revalidateTag(GIVING_TAG, 'max');

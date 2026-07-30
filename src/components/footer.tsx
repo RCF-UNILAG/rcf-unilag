@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { SocialLinks } from "./social-links";
-import { getSiteSettings } from "@/lib/settings";
+import { getSiteContent } from "@/lib/site-content";
 
 export async function Footer() {
-  const settings = await getSiteSettings();
+  const content = await getSiteContent();
 
   return (
     <footer className="bg-black text-white">
@@ -23,7 +23,7 @@ export async function Footer() {
         {/* <iframe src="https://rcfunilag.substack.com/embed" width="480" height="320" style={{ border: "1px solid #EEE", background: "white" }} className="max-w-xl w-full mx-auto" /> */}
 
         <iframe
-          src="https://rcfunilag.substack.com/embed?background=transparent"
+          src={content.link_substack_embed || "https://rcfunilag.substack.com/embed?background=transparent"}
           width="480"
           height="150"
           style={{ border: "1px solid #EEE", background: "transparent" }}
@@ -59,17 +59,17 @@ export async function Footer() {
               Christ-centred, we carry a mandate to illuminate our world, from
               this campus to the world. We are the Chosen Generation.
             </p>
-            <SocialLinks settings={settings} className="flex items-center gap-4" />
+            <SocialLinks content={content} className="flex items-center gap-4" />
           </div>
 
           <FooterColumn
             title="Quick Links"
             links={[
               { text: "About Us", href: "/about" },
-              { text: "Give", href: "/ql/give" },
+              { text: "Give", href: content.link_give || "/ql/give" },
               // { text: "Gallery", href: "/gallery" },
-              { text: "Contact Us", href: "tel:+2349091488306" },
-              { text: "Become a member", href: "/ql/become-a-member" },
+              { text: "Contact Us", href: content.link_phone || "tel:+2349091488306" },
+              { text: "Become a member", href: content.link_become_a_member || "/ql/become-a-member" },
             ]}
             className="lg:justify-self-center"
           />

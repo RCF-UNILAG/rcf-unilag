@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { getSiteContent } from "@/lib/site-content";
 
-const STORY_IMAGE_SRC =
+const FALLBACK_STORY_IMAGE_SRC =
   "https://res.cloudinary.com/dpjo7lpww/image/upload/v1782605665/thmg-4_vwcpjo.jpg";
 
 function StoryImagePlaceholder() {
@@ -38,7 +39,10 @@ function StoryImagePlaceholder() {
   );
 }
 
-export function StorySection() {
+export async function StorySection() {
+  const content = await getSiteContent();
+  const storyImageSrc = content.story_image || FALLBACK_STORY_IMAGE_SRC;
+
   return (
     <section id="our-story" className="section">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
@@ -86,9 +90,9 @@ export function StorySection() {
         <div className="flex flex-col gap-6">
           {/* Image */}
           <div className="relative aspect-[3/4] w-full bg-muted border border-border rounded-xl overflow-hidden">
-            {STORY_IMAGE_SRC ? (
+            {storyImageSrc ? (
               <Image
-                src={STORY_IMAGE_SRC}
+                src={storyImageSrc}
                 alt="RCF UNILAG — one family"
                 fill
                 className="object-cover object-center"
