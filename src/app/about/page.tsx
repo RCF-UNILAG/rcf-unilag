@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { getTenures } from "@/lib/archive";
+import { getTenures } from "@/lib/tenure";
 import { Button } from "@/components/ui/button";
 import {
   StorySection,

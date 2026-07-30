@@ -1,4 +1,4 @@
-import { TENURE_TAG } from '@/lib/archive';
+import { TENURE_TAG } from '@/lib/tenure';
 import { GIVING_TAG } from '@/lib/give';
 import { QUICK_LINK_TAG } from '@/lib/quick-links';
 import { SERMONS_TAG } from '@/lib/sermons';

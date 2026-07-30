@@ -81,7 +81,7 @@ async function fetchTenures(): Promise<Tenure[]> {
     executivesById.get(id)!.push({
       name: row["Name"] ?? "",
       role: row["Role"] ?? "",
-      photoUrl: row["PhotoUrl"] ?? "",
+      photoUrl: row["Photo URL"] ?? "",
     });
   }
 

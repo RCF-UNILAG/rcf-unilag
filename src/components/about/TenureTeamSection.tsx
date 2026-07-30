@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Tenure } from "@/lib/archive";
+import type { Tenure } from "@/lib/tenure";
 
 interface TenureTeamSectionProps {
   tenure: Tenure;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import { getTenures } from "@/lib/archive";
+import { getTenures } from "@/lib/tenure";
 import { TenureTimeline } from "@/components/tenure-timeline";
 import Image from "next/image";
 

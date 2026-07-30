@@ -1,4 +1,4 @@
-import type { Tenure } from "@/lib/archive";
+import type { Tenure } from "@/lib/tenure";
 import { TenureCarousel } from "./TenureCarousel";
 import { cn } from "@/lib/utils";
 import { parseSpeechBlocks, renderSpeechInline } from "@/lib/speech-markdown";

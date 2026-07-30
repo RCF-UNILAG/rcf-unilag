@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import type { Metadata } from "next";
-import { getTenures } from "@/lib/archive";
+import { getTenures } from "@/lib/tenure";
 import { Button } from "@/components/ui/button";
 import { TenureStorySection, TenureTeamSection } from "@/components/about";
 
