@@ -19,7 +19,7 @@ export default async function ArchivePage() {
     content: (
       <Link href={`/tenures/${tenure.slug}`} className="block group">
         <h2 className="mb-2 text-4xl font-semibold group-hover:underline">
-          {tenure.name ?? tenure.theme}
+          {tenure.name || tenure.theme}
         </h2>
         {tenure.name && (
           <p className="mb-4 font-normal italic text-sm md:text-base text-muted-foreground">

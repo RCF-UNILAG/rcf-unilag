@@ -37,7 +37,7 @@ export function TenureStorySection({ tenure, className }: TenureStorySectionProp
             {/* Heading + subtitle */}
             <div className="flex flex-col gap-2">
               <h2 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl tracking-tighter leading-none text-background">
-                {tenure.name ?? tenure.theme}
+                {tenure.name || tenure.theme}
               </h2>
               {tenure.name && (
                 <p className="font-display italic text-lg text-background/50">

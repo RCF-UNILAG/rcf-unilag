@@ -44,16 +44,7 @@ export default async function TenureDetailPage({
 
   return (
     <div className="min-h-screen pt-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <Button asChild variant="outline">
-          <Link href="/tenures">
-            <ChevronLeft className="size-4" aria-hidden="true" />
-            Back
-          </Link>
-        </Button>
-      </div>
-
-      <TenureStorySection tenure={tenure} />
+      <TenureStorySection tenure={tenure} className="bg-black" />
       <TenureTeamSection tenure={tenure} isCurrent={isCurrent} />
     </div>
   );
