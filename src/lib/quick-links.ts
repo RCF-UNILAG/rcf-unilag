@@ -37,10 +37,15 @@ export async function getQuickLinks({ includeInactive = false } = {}): Promise<Q
     is_active: link["Is Active"] !== "FALSE",
     order: link["Display Order"] ?? "0",
   }));
-  console.log("links", links)
 
   const filteredLinks = includeInactive ? links : links.filter((link) => link.is_active);
 
   return filteredLinks.sort((a, b) => Number(b.order) - Number(a.order));
+}
+
+export async function getQuickLinkBySlug(slug: string): Promise<QuickLink | undefined> {
+  const links = await getQuickLinks({ includeInactive: true });
+
+  return links.find((link) => link.slug?.toLowerCase() === slug.toLowerCase());
 }
 
