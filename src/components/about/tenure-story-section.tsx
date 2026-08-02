@@ -28,7 +28,7 @@ export function TenureStorySection({ tenure, className }: TenureStorySectionProp
           <div className="flex flex-col gap-8">
             {/* Eyebrow label */}
             <div className="flex items-center gap-3">
-              <span className="block h-px w-10 bg-secondary" />
+              {/* <span className="block h-px w-10 bg-secondary" /> */}
               <span className="text-xs font-semibold uppercase tracking-widest text-secondary">
                 The Tenure
               </span>
