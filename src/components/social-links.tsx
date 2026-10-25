@@ -14,6 +14,8 @@ export function SocialLinks({ content, className }: SocialLinksProps) {
     { key: "social_instagram", name: "Instagram", icon: "/brands/instagram.svg" },
     { key: "social_twitter", name: "X", icon: "/brands/x.svg" },
     { key: "social_facebook", name: "Facebook", icon: "/brands/facebook.svg" },
+    { key: "social_whatsapp", name: "Whatsapp", icon: "/brands/whatsapp.svg" },
+    { key: "social_spotify", name: "Spotify", icon: "/brands/spotify.svg" }
   ];
 
   return (
