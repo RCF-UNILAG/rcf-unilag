@@ -143,9 +143,9 @@ export function Hero({ content }: { content: SiteContent }) {
               <span className="flex"><span className="font-bold">FRI</span>: 6:00 PM (Divine Encounter)</span>
             </div>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex flex-col lg:flex-row gap-2 items-center">
             <span>Connect with us:</span>
-            <SocialLinks content={content} className="flex items-center gap-4" />
+            <SocialLinks content={content} className="flex items-center " />
           </div>
         </div>
       </div>

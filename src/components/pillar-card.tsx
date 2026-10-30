@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { LongSwiggleUnderline, ShortSwiggleUnderline } from "./icons";
+import SwiggleLine from "./ui/swiggle"; 
 
 export type PillarCardProps = {
   eyebrow?: string;
@@ -59,7 +60,7 @@ export function PillarCard({
             >
               {title}
               <span className="absolute inset-x-0 -bottom-1">
-                {title.length > 7 ? <LongSwiggleUnderline className="w-full" /> : <ShortSwiggleUnderline className="w-full" />}
+                {title.length > 7 ? <SwiggleLine variant={"long"}  /> : <SwiggleLine variant="short" />}
               </span>
             </h3>
           </div>

@@ -12,14 +12,13 @@ export function SocialLinks({ content, className }: SocialLinksProps) {
   const socialNetworks = [
     { key: "social_youtube", name: "YouTube", icon: "/brands/youtube.svg" },
     { key: "social_instagram", name: "Instagram", icon: "/brands/instagram.svg" },
-    { key: "social_twitter", name: "X", icon: "/brands/x.svg" },
-    { key: "social_facebook", name: "Facebook", icon: "/brands/facebook.svg" },
     { key: "social_whatsapp", name: "Whatsapp", icon: "/brands/whatsapp.svg" },
-    { key: "social_spotify", name: "Spotify", icon: "/brands/spotify.svg" }
+    { key: "social_spotify", name: "Spotify", icon: "/brands/spotify.svg" },
+    { key: "social_tiktok", name: "Tiktok", icon: "/brands/tiktok.svg" }
   ];
 
   return (
-    <div className={cn("flex items-center gap-4", className)}>
+    <div className={cn("flex items-center", className)}>
       {socialNetworks.map((social) => {
         const url = content[social.key];
         if (!url) return null;
@@ -35,9 +34,8 @@ export function SocialLinks({ content, className }: SocialLinksProps) {
             <Image
               src={social.icon}
               alt={social.name}
-              className="invert-100"
-              width={16}
-              height={16}
+              width={36}
+              height={36}
             />
           </Link>
         );

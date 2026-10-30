@@ -22,35 +22,37 @@ export function SermonCard({ sermon }: SermonCardProps) {
 
   return (
     <article className="flex flex-col">
-      <div
-        className="relative block aspect-video overflow-hidden rounded-2xl"
-      >
-        <SermonThumbnail
-          youtubeUrl={sermon.youtube_link}
-          title={sermon.title}
-        />       
-      </div>
+      <div className="relative">
 
-      <div className="flex gap-x-1.5 relative bottom-0 right-0 translate-y-1/2 -translate-x-1/2 z-1000">
-        <Link href={sermon.youtube_link} target="_blank" rel="noopener noreferrer" className="p-2 lg:p-3 rounded-full bg-teal-800">
-          <Image
-            src="/brands/youtube.svg"
-            alt="YouTube"
-            className="invert-100"
-            width={16}
-            height={16}
+        <div className="relative aspect-video overflow-clip bg-black rounded-2xl">
+          <SermonThumbnail
+            youtubeUrl={sermon.youtube_link}
+            title={sermon.title}
           />
-        </Link>
+        </div>
+      
+        <div className="flex gap-x-1.5 absolute bottom-0 right-0 translate-y-1/2 -translate-x-1/2">
+          <Link href={sermon.youtube_link} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-teal-800 hover:brightness-110">
+            <Image
+              src="/brands/youtube.svg"
+              alt="YouTube"
+              className=""
+              width={32}
+              height={32}
+            />
+          </Link>
 
-        <Link href={sermon.spotify_link} target="_blank" rel="noopener noreferrer" className="p-2 lg:p-3 rounded-full bg-teal-800">
-          <Image
-            src="/brands/spotify.svg"
-            alt="YouTube"
-            className="invert-100"
-            width={16}
-            height={16}
-          />
-        </Link>
+          <Link href={sermon.spotify_link} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-teal-800 hover:brightness-110">
+            <Image
+              src="/brands/spotify.svg"
+              alt="YouTube"
+              className=""
+              width={32}
+              height={32}
+            />
+          </Link>
+        </div>
+        
       </div>
 
       <p className="text-muted-foreground line-clamp-3 text-xs mt-4">
