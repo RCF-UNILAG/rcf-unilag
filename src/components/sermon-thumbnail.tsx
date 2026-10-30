@@ -27,7 +27,7 @@ export function SermonThumbnail({ youtubeUrl, title }: SermonThumbnailProps) {
       src={sources[srcIndex]}
       alt={title}
       fill
-      className="object-cover transition-transform duration-300 hover:scale-105"
+      className="object-cover transition-transform duration-300 hover:scale-105 rounded-2xl"
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       onError={() => setSrcIndex((i) => Math.min(i + 1, sources.length - 1))}
     />
