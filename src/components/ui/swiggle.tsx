@@ -1,42 +1,36 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'motion/react';
+import { useRef } from 'react';
 
 interface SwiggleProps {
-  variant: 'short' | 'long';
+  variant?: 'short' | 'long';
   className?: string;
 }
 
-export default function SwiggleLine({ variant, className = '' }: SwiggleProps) {
-  // Set distinct vector paths and dimensions depending on if it's the long or short swiggle
-  const isLong = variant === 'long';
-  
-  const width = isLong ? "160" : "80";
-  const viewBox = isLong ? "0 0 160 12" : "0 0 80 12";
-  
-  // Replace these strings with your exact SVG path 'd' values from the design files
-  const pathData = isLong
-    ? "M2 6 C 40 2, 80 10, 120 2 C 140 2, 150 6, 158 6" // Example Long path
-    : "M2 6 C 20 2, 40 10, 60 2 C 70 2, 75 6, 78 6";     // Example Short path
+export default function SwiggleLine({ className = '' }: SwiggleProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const isInView = useInView(svgRef, { margin: '-50px' });
 
   return (
-    <svg 
-      width={width} 
-      height="12" 
-      viewBox={viewBox} 
-      fill="none" 
-      xmlns="http://w3.org"
+    <svg
+      width="100%"
+      height="5"
+      viewBox="0 0 352 5"
+      preserveAspectRatio="none"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       className={`block ${className}`}
+      ref={svgRef}
     >
       <motion.path
-        d={pathData}
-        stroke="currentColor" // Inherits Tailwind text color utilities (e.g., text-yellow-500)
+        d="M1.50024 2.4917C8.71096 1.1694 16.102 1.1694 23.3127 2.4917C30.5235 3.81401 37.9145 3.81401 45.1252 2.4917C52.336 1.1694 59.727 1.1694 66.9377 2.4917C74.1485 3.81401 81.5395 3.81401 88.7503 2.4917C95.961 1.1694 103.352 1.1694 110.563 2.4917C117.773 3.81401 125.165 3.81401 132.375 2.4917C139.586 1.1694 146.977 1.1694 154.188 2.4917C161.398 3.81401 168.79 3.81401 176 2.4917C183.211 1.1694 190.602 1.1694 197.813 2.4917C205.023 3.81401 212.415 3.81401 219.625 2.4917C226.836 1.16939 234.227 1.16939 241.438 2.49169C248.648 3.814 256.04 3.814 263.25 2.4917C270.461 1.16939 277.852 1.16939 285.063 2.4917C292.273 3.814 299.665 3.814 306.875 2.49169C314.086 1.16939 321.477 1.16939 328.688 2.49169C335.898 3.814 343.29 3.814 350.5 2.49169"
+        stroke="#CF2B78"
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true, margin: "-50px" }} // Triggers slightly before it fully hits the viewport
+        animate={{ pathLength: isInView ? 1 : 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       />
     </svg>
