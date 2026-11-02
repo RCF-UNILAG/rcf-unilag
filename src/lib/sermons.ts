@@ -10,7 +10,7 @@ export interface Sermon {
   spotify_link: string;
 }
 
-const SERMONS_CSV_URL = undefined;
+const SERMONS_CSV_URL = process.env.NEXT_PUBLIC_SERMONS_CSV_URL;
 
 const FALLBACK_CSV_DATA = `Timestamp,Date Preached,Sermon Title,Speaker,Description,YouTube Link, Spotify Link
 4/20/2026 10:30:00,2026-04-19,Treasure in Earthen Vessels,Pastor Taiwo Tonade,"An encouraging message about God's power working through our weaknesses.",https://www.youtube.com/live/lff2BI8Ib8o?si=SUFs__iOeEEDHAiO&t=1566,
