@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default async function SermonsPage() {
   const sermons = await getSermons();
+  // 
 
   return (
     <div className="min-h-screen bg-white">

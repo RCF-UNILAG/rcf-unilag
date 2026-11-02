@@ -9,6 +9,7 @@ export async function fetchAndParseCSV(
   }
 ): Promise<Record<string, string>[]> {
   let csvText = options?.fallbackCsvText ?? "";
+  // console.log(csvText);
 
   if (url) {
     try {
@@ -20,6 +21,7 @@ export async function fetchAndParseCSV(
       });
       if (response.ok) {
         csvText = await response.text();
+        console.log(csvText); 
       } else {
         console.warn(
           `Failed to fetch CSV from ${url}, using fallback data. Status: ${response.status}`,

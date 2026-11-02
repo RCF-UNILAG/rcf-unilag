@@ -134,7 +134,7 @@ export function Navigation() {
                 </NavigationMenuLink>
               </NavigationMenuItem> */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Who are we?</NavigationMenuTrigger>
+                <NavigationMenuTrigger>Who we are</NavigationMenuTrigger>
                 <NavigationMenuContent className="rounded-xl">
                   <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                     <li className="row-span-3">
@@ -144,7 +144,7 @@ export function Navigation() {
                           href="/about"
                         >
                           <div className="text-lg font-medium">
-                            Who are we?
+                            Get to know us
                           </div>
                           <p className="text-muted-foreground text-sm leading-tight">
                             The Chosen Generation
@@ -247,14 +247,16 @@ export function Navigation() {
 function NavigationDialog() {
   const [open, setOpen] = React.useState(false);
   const linkClassName =
-    "font-display font-black tracking-tighter text-2xl md:text-4xl text-white md:text-white/80 hover:text-white data-[active=true]:text-primary data-[active=true]:hover:text-primary uppercase";
+    "font-display font-bold tracking-tighter text-2xl md:text-4xl text-white md:text-white/80 hover:text-white data-[active=true]:text-primary data-[active=true]:hover:text-primary uppercase";
   const close = () => setOpen(false);
 
   return (
     <SheetPrimitive.Root data-slot="sheet" open={open} onOpenChange={setOpen}>
-      <SheetPrimitive.Trigger data-slot="sheet-trigger">
-        <MenuIcon className="text-white" />
-      </SheetPrimitive.Trigger>
+       
+        <SheetPrimitive.Trigger data-slot="sheet-trigger">
+          <MenuIcon className="text-white md:hidden" />
+        </SheetPrimitive.Trigger>
+      
       <SheetPrimitive.Portal data-slot="sheet-portal">
         <SheetPrimitive.Overlay
           data-slot="sheet-overlay"
@@ -281,7 +283,7 @@ function NavigationDialog() {
                 Home
               </NavLink>
               <NavLink href="/about" className={linkClassName} onClick={close}>
-                Who are we?
+                Who we are
               </NavLink>
               <div className="ml-4 flex flex-col gap-2">
                 <NavLink href="/about#our-story" className={cn(linkClassName, "font-medium")} onClick={close}>

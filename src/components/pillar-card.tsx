@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { LongSwiggleUnderline, ShortSwiggleUnderline } from "./icons";
+import SwiggleLine from "./ui/swiggle";
 
 export type PillarCardProps = {
   eyebrow?: string;
@@ -58,8 +58,8 @@ export function PillarCard({
               className="relative inline uppercase font-display text-primary font-semibold text-4xl xl:text-5xl tracking-tighter leading-none"
             >
               {title}
-              <span className="absolute inset-x-0 -bottom-1">
-                {title.length > 7 ? <LongSwiggleUnderline className="w-full" /> : <ShortSwiggleUnderline className="w-full" />}
+              <span className="absolute inset-x-0 -bottom-1 inline-block">
+                {title.length > 6 ? <SwiggleLine variant={"long"}  /> : <SwiggleLine variant="short" />}
               </span>
             </h3>
           </div>
