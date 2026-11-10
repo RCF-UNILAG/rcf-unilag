@@ -15,6 +15,7 @@ social_spotify,https://open.spotify.com/show/0SW6z1Bktu45pMCIl3xMFc?si=8a9ef8de2
 social_tiktok,https://www.tiktok.com/@rcf_unilag?_r=1&_t=ZS-9AwP5dQjrTZ
 footer_email,officialrcfunilag@gmail.com
 link_become_a_member,/ql/join
+link_academic_resources,https://rcfunilag.com/academicresources
 link_give,/ql/give
 link_youtube_live,https://www.youtube.com/@rcfunilagtv
 link_phone,tel:+2349091488306
@@ -24,7 +25,7 @@ home_sunday_image,https://res.cloudinary.com/dpjo7lpww/image/upload/v1781396840/
 story_image,https://res.cloudinary.com/dpjo7lpww/image/upload/v1782605665/thmg-4_vwcpjo.jpg
 pillar_word_image,/images/pillar-word.jpg
 pillar_love_image,/images/pillar-love.jpg
-pillar_excellence_image,/images/pillar-excellence.png
+pillar_excellence_image,/images/pillar-excellence.jpg
 `;
 
 export const SITE_CONTENT_TAG = 'site-content';

@@ -59,7 +59,7 @@ export function PillarCard({
             >
               {title}
               <span className="absolute inset-x-0 -bottom-1 inline-block">
-                {title.length > 6 ? <SwiggleLine variant={"long"}  /> : <SwiggleLine variant="short" />}
+                {title.length > 6 ? <SwiggleLine /> : <SwiggleLine />}
               </span>
             </h3>
           </div>
