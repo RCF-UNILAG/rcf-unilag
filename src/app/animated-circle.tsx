@@ -22,7 +22,7 @@ export function HandwrittenCircle({
         // animate={{ pathLength: 1 }}
         whileInView={{ pathLength: 1 }}
         transition={{
-          duration: 1,
+          duration: 2,
           ease: "easeInOut",
         }}
       />

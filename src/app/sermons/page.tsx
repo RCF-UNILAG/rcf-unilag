@@ -14,11 +14,11 @@ export default async function SermonsPage() {
   // 
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       {/* Header Section */}
       <PageHeroSimple
         heading="Sermons"
-        description="Explore our collection of recent messages, series, and teachings. Grow your faith and catch up on anything you missed."
+        description="Explore our collection of recent messages, series, and teachings. Grow your faith and catch up on anything you missed. Missed a service? Catch up anytime, anywhere — stream on YouTube or take the Word on the go with Spotify."
       />
 
       {/* Main Content Section */}

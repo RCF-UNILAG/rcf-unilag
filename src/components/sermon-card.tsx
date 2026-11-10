@@ -14,58 +14,76 @@ const socialNetworks = [
 
 export function SermonCard({ sermon }: SermonCardProps) {
   const formattedDate = new Date(sermon.date).toLocaleDateString("en-US", {
-    month: "long",
+    month: "short",
     day: "numeric",
     year: "numeric",
   });
   // console.log(formattedDate)
 
   return (
-    <article className="flex flex-col">
+    <article className="flex flex-col rounded-2xl overflow-clip bg-white shadow-sm">
       <div className="relative">
-
-        <div className="relative aspect-video overflow-clip bg-black rounded-2xl">
+        <div className="relative overflow-clip aspect-video bg-black">
           <SermonThumbnail
             youtubeUrl={sermon.youtube_link}
             title={sermon.title}
           />
         </div>
       
-        <div className="flex gap-x-1.5 absolute bottom-0 right-0 translate-y-1/2 -translate-x-1/2">
-          <Link href={sermon.youtube_link} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-teal-800 hover:brightness-110">
+        <div className="flex gap-x-3 absolute bottom-0 right-5 translate-y-2/5">
+          <Link href={sermon.youtube_link} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black hover:brightness-110">
             <Image
-              src="/brands/youtube.svg"
+              src="/brands/youtube-big.svg"
               alt="YouTube"
               className=""
-              width={32}
-              height={32}
+              width={25}
+              height={25}
             />
           </Link>
 
-          <Link href={sermon.spotify_link} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-teal-800 hover:brightness-110">
+          <Link href={sermon.spotify_link} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black hover:brightness-110">
             <Image
-              src="/brands/spotify.svg"
+              src="/brands/spotify-big.svg"
               alt="YouTube"
               className=""
-              width={32}
-              height={32}
+              width={25}
+              height={25}
             />
           </Link>
         </div>
         
       </div>
 
-      <p className="text-muted-foreground line-clamp-3 text-xs mt-4">
-        {formattedDate}
-      </p>
+      <div className="flex flex-col gap-y-3 p-5">
+        <div className="text-muted-foreground line-clamp-1 text-xs flex gap-x-3">
+          <span className="flex gap-x-1">
+            <Image
+              src="/icons/calendar.svg"
+              alt="calendar-icon"
+              width={12}
+              height={12}
+            />
+            {formattedDate}
+          </span>
+          <span className="flex gap-x-1">
+            <Image
+              src="/icons/person.svg"
+              alt="person-icon"
+              width={12}
+              height={12}
+            />
+            {sermon.speaker}
+          </span>
+        </div>
 
-      <h3 className="text-base font-bold line-clamp-2 mt-1">
-        {sermon.title}
-      </h3>
+        <h3 className="font-bold line-clamp-2 text-2xl">
+          {sermon.title}
+        </h3>
 
-      <p className="text-muted-foreground line-clamp-3 grow text-sm mt-1">
-        {sermon.description}
-      </p>
+        <p className="text-muted-foreground line-clamp-3 grow text-xs">
+          {sermon.description}
+        </p>
+      </div>
     </article>
   );
 }

@@ -4,7 +4,6 @@ import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
 
 interface SwiggleProps {
-  variant?: 'short' | 'long';
   className?: string;
 }
 
@@ -31,8 +30,9 @@ export default function SwiggleLine({ className = '' }: SwiggleProps) {
         strokeLinejoin="round"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: isInView ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
       />
     </svg>
   );
 }
+

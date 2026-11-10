@@ -103,12 +103,23 @@ export function Hero({ content }: { content: SiteContent }) {
               <span className="bg-linear-to-r from-[#E71A57] to-[#9342AB] bg-clip-text text-transparent">
                 One Family
               </span>
-              <span className="absolute bottom-0 left-0 -translate-x-3/4 translate-y-12">
-                <FlowerDrawn className="hidden md:block" />
-              </span>
-              <span className="absolute top-0 right-0 translate-x-3/4 -translate-y-8 rotate-180 text-[#E71B5D]">
+              <Image
+                  src="/icons/FlowerDrawnLower.svg" 
+                  alt="Drawn Flower Lower"
+                  width={94}
+                  height={100}
+                  className="hidden lg:block absolute bottom-0 left-0 -translate-x-[65%] translate-y-11"
+                />
+                <Image
+                  src="/icons/FlowerDrawnUpper.svg" 
+                  alt="Drawn Flower Upper"
+                  width={94}
+                  height={100}
+                  className="hidden sm:block absolute top-0 right-0 translate-x-[70%] -translate-y-7"
+                />
+              {/* <span className="absolute top-0 right-0 translate-x-3/4 -translate-y-8 rotate-180 text-[#E71B5D]">
                 <FlowerDrawn className="hidden sm:block" />
-              </span>
+              </span> */}
             </h1>
             <p className="sm:w-xl md:text-xl">
               We are passionate about our members. A place to grow in faith,
@@ -175,7 +186,9 @@ export function WeAreRCFSection({ content }: { content: SiteContent }) {
     {
       title: "Excellence",
       description: "At RCF UNILAG, we believe academic excellence is a spiritual responsibility. With God's help and our diligent Academic Unit, we provide the study materials and support you need to achieve excellent grades.",
-      image: content.pillar_excellence_image || "/images/pillar-excellence.png",
+      image: content.pillar_excellence_image || "/images/pillar-excellence.jpg",
+      ctaLabel: "Academic Resources",
+      ctaHref: content.link_academic_resources || "https://rcfunilag.com/academicresources",
       orientation: "image-left" as const,
     },
   ];
