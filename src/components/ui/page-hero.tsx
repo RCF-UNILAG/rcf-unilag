@@ -97,7 +97,7 @@ const pageHeroHeadingVariants = cva(
         default: "text-5xl sm:text-6xl",
         sm: "text-4xl sm:text-5xl",
         lg: "text-6xl sm:text-7xl",
-        xl: "text-9xl sm:text-8xl",
+        xl: "text-5xl sm:text-6xl md:text-8xl lg:9xl",
       },
     },
     defaultVariants: {
