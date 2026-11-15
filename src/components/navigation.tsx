@@ -4,10 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform } from "motion/react";
-
 import { MenuIcon, X } from "lucide-react";
 import { Dialog as SheetPrimitive } from "radix-ui";
-
+import { Button } from "./ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   NavigationMenu,
@@ -104,14 +103,14 @@ export function Navigation() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 px-4 z-998"
+      className="w-full fixed top-0 left-0 px-4 right-0 z-998"
       style={{
         backgroundColor: isTransparentRoute
           ? dynamicBackground
           : "rgba(0,0,0,1)",
       }}
     >
-      <div className="h-16 max-w-7xl mx-auto flex items-center justify-between">
+      <div className="py-2 w-full max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -124,7 +123,7 @@ export function Navigation() {
         </Link>
         {!isMobile && (
           <NavigationMenu viewport={isMobile}>
-            <NavigationMenuList className="flex-wrap">
+            <NavigationMenuList className="flex-wrap gap-4">
               {/* <NavigationMenuItem>
                 <NavigationMenuLink
                   asChild
@@ -232,6 +231,20 @@ export function Navigation() {
                   <Link href="/ql">Quick links</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  asChild
+                  className={navigationMenuTriggerStyle()}
+                >
+                  <Link 
+                  href="/ql/become-a-member"
+                  className="h-full rounded-full! px-8 py-3 border-2 border-white">
+                    Join us
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+
             </NavigationMenuList>
           </NavigationMenu>
         )}

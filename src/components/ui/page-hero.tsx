@@ -97,6 +97,7 @@ const pageHeroHeadingVariants = cva(
         default: "text-5xl sm:text-6xl",
         sm: "text-4xl sm:text-5xl",
         lg: "text-6xl sm:text-7xl",
+        xl: "text-9xl sm:text-8xl",
       },
     },
     defaultVariants: {
@@ -179,9 +180,13 @@ const PageHeroClassic = React.forwardRef<HTMLDivElement, PageHeroSimpleProps>(
       {...props}
     >
       <PageHeroContent align={align} maxWidth={maxWidth}>
-        <PageHeroHeading size={headingSize}>{heading}</PageHeroHeading>
+        <PageHeroHeading 
+        size={headingSize}
+        className="bg-linear-to-r from-[#E71A57] to-[#9342AB] bg-clip-text text-transparent">
+          {heading}
+        </PageHeroHeading>
         {description && (
-          <PageHeroDescription>{description}</PageHeroDescription>
+          <PageHeroDescription className="text-black">{description}</PageHeroDescription>
         )}
         {actions && <div className="mt-8">{actions}</div>}
       </PageHeroContent>

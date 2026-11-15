@@ -22,7 +22,7 @@ export default async function Home() {
       <WeAreRCFSection content={content} />
 
       {/* Latest Sermons Section */}
-      <section className="bg-[#EAD9EE]">
+      <section className="bg-[#FAF2F6]">
         <div className="section text-center flex flex-col gap-9">
           <div className="space-y-1">
             <h2 className="text-6xl font-bold font-display">Join us this Sunday</h2>
