@@ -54,7 +54,7 @@ function SermonPlatformLinks({
     "inline-flex items-center justify-center rounded-full! px-16 py-5 border-2 border-white text-white bg-[#CF2B78] hover:brightness-110";
 
   return (
-    <div className="flex flex-col md:flex-row gap-9 w-full md:w-fit justify-self-center">
+    <div className="flex flex-col md:flex-row gap-y-2 md:gap-x-9 w-full md:w-fit justify-self-center">
       <Link href={spotifyUrl} target="_blank" rel="noopener noreferrer" className={linkStyle}>
       <Image
         src="/brands/spotify-big.svg"
