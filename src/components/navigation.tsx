@@ -238,7 +238,7 @@ export function Navigation() {
                   className={navigationMenuTriggerStyle()}
                 >
                   <Link 
-                  href="/ql/become-a-member"
+                  href="/ql/join"
                   className="h-full rounded-full! px-8 py-3 border-2 border-white">
                     Join us
                   </Link>
