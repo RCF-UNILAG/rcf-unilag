@@ -51,7 +51,7 @@ function SermonPlatformLinks({
   youtubeUrl: string;
 }) {
   const linkStyle =
-    "inline-flex items-center justify-center rounded-full! px-16 py-5 border-2 border-white text-white bg-[#CF2B78] hover:brightness-11  ";
+    "inline-flex items-center justify-center rounded-full! px-16 py-5 border-2 border-white text-white bg-[#CF2B78] hover:brightness-110";
 
   return (
     <div className="flex items-center justify-between gap-9 w-fit justify-self-center">
