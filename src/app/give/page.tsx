@@ -70,8 +70,8 @@ export default async function Page() {
         </div>
       </div>
 
-      {/* ── 1k from 1k Initiative ─────────────────────────────────────────── */}
-      <section className="bg-muted/40 border-y border-border">
+      {/* ── 1k from 1k Initiative (#paused as it's no longer in use) ─────────────────────────────────────────── */}
+      {/* <section className="bg-muted/40 border-y border-border">
         <div className="section grid grid-cols-1 md:grid-cols-2 gap-16">
 
           <div className="flex flex-col gap-12 flex-1 min-w-0">
@@ -137,11 +137,11 @@ export default async function Page() {
             </div>
 
             {/* ── Option A: Radial Ring (recommended) ── */}
-            <RadialRingProgress
+            {/* <RadialRingProgress
               current={initiative.amountRaised}
               donors={initiative.donorCount}
               goal={initiative.goal}
-            />
+            /> */}
 
             {/* ── Option B: Liquid Fill ─────────────── */}
             {/* <LiquidFillProgress
@@ -163,10 +163,10 @@ export default async function Page() {
               donors={initiative.donorCount}
               goal={initiative.goal}
             /> */}
-          </div>
+          {/* </div>
 
         </div>
-      </section>
+      </section> */} 
     </div>
   );
 }

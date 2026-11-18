@@ -31,7 +31,7 @@ export function SermonCard({ sermon }: SermonCardProps) {
         </div>
       
         <div className="flex gap-x-3 absolute bottom-0 right-5 translate-y-2/5">
-          <Link href={sermon.youtube_link} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black hover:brightness-110">
+          <Link href={sermon.youtube_link} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black hover:bg-neutral-800">
             <Image
               src="/brands/youtube-big.svg"
               alt="YouTube"
@@ -41,7 +41,7 @@ export function SermonCard({ sermon }: SermonCardProps) {
             />
           </Link>
 
-          <Link href={sermon.spotify_link} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black hover:brightness-110">
+          <Link href={sermon.spotify_link} target="_blank" rel="noopener noreferrer" className="p-4 rounded-full bg-black hover:bg-neutral-800">
             <Image
               src="/brands/spotify-big.svg"
               alt="YouTube"

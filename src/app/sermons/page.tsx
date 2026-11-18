@@ -27,8 +27,8 @@ export default async function SermonsPage() {
         headingSize="xl"
         actions={
           <SermonPlatformLinks
-            spotifyUrl={content.social_spotify}
-            youtubeUrl={content.social_youtube}
+            spotifyUrl={content.social_spotify }
+            youtubeUrl={content.sermon_youtube}
           />
         }
         className="bg-[#EAD9EE]"
