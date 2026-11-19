@@ -145,7 +145,7 @@ export function Hero({ content }: { content: SiteContent }) {
             <div className="grid grid-cols-[1fr_auto_1fr] gap-6 [&>span:nth-child(1)]:justify-end [&>span:nth-child(3)]:justify-start text-base">
               <span className="flex"><span className="font-bold">SUN</span>: 8:00 AM (Service)</span>
               <span className="mx-auto">|</span>
-              <span className="flex"><span className="font-bold">TUE</span>: 6:00 PM (Bible Study)</span>
+              <span className="flex"><span className="font-bold">TUE</span>: 5:00 PM (Bible Study)</span>
             </div>
 
             <div className="grid grid-cols-[1fr_auto_1fr] gap-6 [&>span:nth-child(1)]:justify-end [&>span:nth-child(3)]:justify-start text-base">
